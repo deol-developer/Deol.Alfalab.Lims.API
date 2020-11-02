@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deol.Alfalab.Lims.API", "Deol.Alfalab.Lims.API\Deol.Alfalab.Lims.API.csproj", "{FBA2C7A9-CFFB-46EE-B14B-FADB89D19094}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deol.Alfalab.Lims.API.Example", "Deol.Alfalab.Lims.API.Example\Deol.Alfalab.Lims.API.Example.csproj", "{1A8BCFA1-F0A1-4E62-8D76-644B8069A1F0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBA2C7A9-CFFB-46EE-B14B-FADB89D19094}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBA2C7A9-CFFB-46EE-B14B-FADB89D19094}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBA2C7A9-CFFB-46EE-B14B-FADB89D19094}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBA2C7A9-CFFB-46EE-B14B-FADB89D19094}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A8BCFA1-F0A1-4E62-8D76-644B8069A1F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A8BCFA1-F0A1-4E62-8D76-644B8069A1F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A8BCFA1-F0A1-4E62-8D76-644B8069A1F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A8BCFA1-F0A1-4E62-8D76-644B8069A1F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B22AA716-8F94-494A-9982-58761CB3DC86}
+	EndGlobalSection
+EndGlobal
