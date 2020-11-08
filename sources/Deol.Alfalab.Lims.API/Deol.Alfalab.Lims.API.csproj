@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Oleg Devyatkin</Authors>
+    <Description>Alfalab LIMS API Client for .NET</Description>
+    <Copyright>2020</Copyright>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/deoldeveloper/Deol.Alfalab.Lims.API</PackageProjectUrl>
+    <PackageReleaseNotes>This is initial release</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>
