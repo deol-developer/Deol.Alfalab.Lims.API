@@ -4,6 +4,7 @@ using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Deol.Alfalab.Lims.API
 {
@@ -11,11 +12,25 @@ namespace Deol.Alfalab.Lims.API
     {
         private HttpClient HttpClient { get; } = new HttpClient();
 
+        private Encoding RequestEncoding { get; set; }
+
+        private Encoding ResponseEncoding { get; set; }
+
         public void Dispose() => this.HttpClient.Dispose();
 
-        public Client(Uri baseAddress) => this.HttpClient.BaseAddress = baseAddress;
+        public Client(Uri baseAddress, ClientOptions clientOptions)
+        {
+            this.HttpClient.BaseAddress = baseAddress;
 
-        public Client(string baseAddress) : this(new Uri(baseAddress)) { }
+            this.RequestEncoding = clientOptions.RequestEncoding ?? Encoding.UTF8;
+            this.ResponseEncoding = clientOptions.ResponseEncoding ?? Encoding.GetEncoding("Windows-1251");
+        }
+
+        public Client(string baseAddress, ClientOptions clientOptions) : this(new Uri(baseAddress), clientOptions) { }
+
+        public Client(Uri baseAddress) : this(baseAddress, new ClientOptions()) { }
+
+        public Client(string baseAddress) : this(new Uri(baseAddress), new ClientOptions()) { }
 
         private async Task<TResponseMessage> SendMessageAsync<TResponseMessage>(IRequestMessage queryMessage)
             where TResponseMessage : IResponseMessage, new()
@@ -27,7 +42,10 @@ namespace Deol.Alfalab.Lims.API
         {
             try
             {
-                var content = new StringContent(queryMessage.ToXMLMessage(), Encoding.UTF8, "application/xml");
+                var declaration = new XDeclaration("1.0", this.RequestEncoding.WebName, "yes").ToString();
+                var message = queryMessage.ToXMLMessage();
+
+                var content = new StringContent(declaration + Environment.NewLine + message, this.RequestEncoding, "application/xml");
 
                 return await this.HttpClient.PostAsync("/", content);
             }
@@ -44,7 +62,7 @@ namespace Deol.Alfalab.Lims.API
             {
                 var resultBytes = await httpResponseMessage.Content.ReadAsByteArrayAsync();
 
-                var resultString = Encoding.GetEncoding("Windows-1251").GetString(resultBytes);
+                var resultString = this.ResponseEncoding.GetString(resultBytes);
 
                 var response = new TResponseMessage();
                 response.InitFromXMLMessage(resultString);
@@ -53,7 +71,7 @@ namespace Deol.Alfalab.Lims.API
             }
             catch (Exception ex)
             {
-                throw new ParsingResponseExсeption("Оибка при разборе ответа от ЛИС", ex);
+                throw new ParsingResponseExсeption("Ошибка при разборе ответа от ЛИС", ex);
             }
         }
 

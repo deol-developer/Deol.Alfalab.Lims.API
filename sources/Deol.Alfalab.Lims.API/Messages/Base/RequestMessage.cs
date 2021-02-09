@@ -33,10 +33,11 @@ namespace Deol.Alfalab.Lims.API.Messages.Base
 
         public string ToXMLMessage()
         {
-            var doc = new XDocument(new XDeclaration("1.0", "utf-8", "yes"),
-                new XElement("Message", this.GetMessageAttributes(), this.GetMessageElements()));
+            var doc = new XDocument(
+                new XElement("Message", this.GetMessageAttributes(),
+                    this.GetMessageElements()));
 
-            return $"{doc.Declaration}{Environment.NewLine}{doc}";
+            return doc.ToString();
         }
 
         protected virtual IEnumerable<XElement> GetMessageElements() => Enumerable.Empty<XElement>();
