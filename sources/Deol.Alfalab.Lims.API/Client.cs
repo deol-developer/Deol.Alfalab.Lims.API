@@ -36,7 +36,7 @@ namespace Deol.Alfalab.Lims.API
         private async Task<TResponseMessage> SendMessageAsync<TResponseMessage>(IRequestMessage queryMessage, CancellationToken cancellationToken = default)
             where TResponseMessage : IResponseMessage, new()
         {
-            return await ParsingResponseAsync<TResponseMessage>(await this.SendRequestAsync(queryMessage, cancellationToken));
+            return await ParsingResponseAsync<TResponseMessage>(await this.SendRequestAsync(queryMessage, cancellationToken).ConfigureAwait(false)).ConfigureAwait(false);
         }
 
         private async Task<HttpResponseMessage> SendRequestAsync(IRequestMessage queryMessage, CancellationToken cancellationToken = default)
@@ -48,7 +48,7 @@ namespace Deol.Alfalab.Lims.API
 
                 var content = new StringContent(declaration + Environment.NewLine + message, this.RequestEncoding, "application/xml");
 
-                return await this.HttpClient.PostAsync("/", content, cancellationToken);
+                return await this.HttpClient.PostAsync("/", content, cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -65,7 +65,7 @@ namespace Deol.Alfalab.Lims.API
         {
             try
             {
-                var resultBytes = await httpResponseMessage.Content.ReadAsByteArrayAsync();
+                var resultBytes = await httpResponseMessage.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
 
                 var resultString = this.ResponseEncoding.GetString(resultBytes);
 
@@ -82,11 +82,11 @@ namespace Deol.Alfalab.Lims.API
 
         public async Task<ResponseBlankFile> GetBlankFileBinaryAsync(RequestBlankFile request, CancellationToken cancellationToken = default)
         {
-            return await ParsingResponseFileBinaryAsync(await this.SendRequestAsync(request, cancellationToken));
+            return await ParsingResponseFileBinaryAsync(await this.SendRequestAsync(request, cancellationToken).ConfigureAwait(false)).ConfigureAwait(false);
 
             async Task<ResponseBlankFile> ParsingResponseFileBinaryAsync(HttpResponseMessage httpResponseMessage)
             {
-                var resultBytes = await httpResponseMessage.Content.ReadAsByteArrayAsync();
+                var resultBytes = await httpResponseMessage.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
 
                 var contentType = httpResponseMessage.Content.Headers.ContentType.MediaType;
 
@@ -111,30 +111,43 @@ namespace Deol.Alfalab.Lims.API
             }
         }
 
-        public async Task<ResponseImportReferral> CreateOrUpdateReferralAsync(RequestCreateOrUpdateReferral request, CancellationToken cancellationToken = default) => await this.SendMessageAsync<ResponseImportReferral>(request, cancellationToken);
+        public async Task<ResponseImportReferral> CreateOrUpdateReferralAsync(RequestCreateOrUpdateReferral request, CancellationToken cancellationToken = default) => 
+            await this.SendMessageAsync<ResponseImportReferral>(request, cancellationToken).ConfigureAwait(false);
 
-        public async Task<ResponseImportReferral> RemoveReferralAsync(RequestRemoveReferral request, CancellationToken cancellationToken = default) => await this.SendMessageAsync<ResponseImportReferral>(request, cancellationToken);
+        public async Task<ResponseImportReferral> RemoveReferralAsync(RequestRemoveReferral request, CancellationToken cancellationToken = default) => 
+            await this.SendMessageAsync<ResponseImportReferral>(request, cancellationToken).ConfigureAwait(false);
 
-        public async Task<ResponseCreateDoctorOrders> CreateDoctorOrdersAsync(RequestCreateDoctorOrders request, CancellationToken cancellationToken = default) => await this.SendMessageAsync<ResponseCreateDoctorOrders>(request, cancellationToken);
+        public async Task<ResponseCreateDoctorOrders> CreateDoctorOrdersAsync(RequestCreateDoctorOrders request, CancellationToken cancellationToken = default) => 
+            await this.SendMessageAsync<ResponseCreateDoctorOrders>(request, cancellationToken).ConfigureAwait(false);
 
-        public async Task<ResponseChangeEmail> ChangeEmailAsync(RequestChangeEmail request, CancellationToken cancellationToken = default) => await this.SendMessageAsync<ResponseChangeEmail>(request, cancellationToken);
+        public async Task<ResponseChangeEmail> ChangeEmailAsync(RequestChangeEmail request, CancellationToken cancellationToken = default) => 
+            await this.SendMessageAsync<ResponseChangeEmail>(request, cancellationToken).ConfigureAwait(false);
 
-        public async Task<ResponseReferralResults> GetReferralResultsAsync(RequestReferralResults request, CancellationToken cancellationToken = default) => await this.SendMessageAsync<ResponseReferralResults>(request, cancellationToken);
+        public async Task<ResponseReferralResults> GetReferralResultsAsync(RequestReferralResults request, CancellationToken cancellationToken = default) => 
+            await this.SendMessageAsync<ResponseReferralResults>(request, cancellationToken).ConfigureAwait(false);
 
-        public async Task<ResponseReferralResults> GetNextReferralResultsAsync(RequestNextReferralResults request, CancellationToken cancellationToken = default) => await this.SendMessageAsync<ResponseReferralResults>(request, cancellationToken);
+        public async Task<ResponseReferralResults> GetNextReferralResultsAsync(RequestNextReferralResults request, CancellationToken cancellationToken = default) => 
+            await this.SendMessageAsync<ResponseReferralResults>(request, cancellationToken).ConfigureAwait(false);
 
-        public async Task<ResponseCountReferralResults> GetCountReferralResultsAsync(RequestCountReferralResults request, CancellationToken cancellationToken = default) => await this.SendMessageAsync<ResponseCountReferralResults>(request, cancellationToken);
+        public async Task<ResponseCountReferralResults> GetCountReferralResultsAsync(RequestCountReferralResults request, CancellationToken cancellationToken = default) => 
+            await this.SendMessageAsync<ResponseCountReferralResults>(request, cancellationToken).ConfigureAwait(false);
 
-        public async Task<ResponseNewReferralResults> GetNewReferralResultsAsync(RequestNewReferralResults request, CancellationToken cancellationToken = default) => await this.SendMessageAsync<ResponseNewReferralResults>(request, cancellationToken);
+        public async Task<ResponseNewReferralResults> GetNewReferralResultsAsync(RequestNewReferralResults request, CancellationToken cancellationToken = default) => 
+            await this.SendMessageAsync<ResponseNewReferralResults>(request, cancellationToken).ConfigureAwait(false);
 
-        public async Task<ResponseMessage> SetReferralResultsImportAsync(RequestReferralResultsImport request, CancellationToken cancellationToken = default) => await this.SendMessageAsync<ResponseMessage>(request, cancellationToken);
+        public async Task<ResponseMessage> SetReferralResultsImportAsync(RequestReferralResultsImport request, CancellationToken cancellationToken = default) => 
+            await this.SendMessageAsync<ResponseMessage>(request, cancellationToken).ConfigureAwait(false);
 
-        public async Task<ResponsePatientReferralResults> GetPatientReferralResultsAsync(RequestPatientReferralResults request, CancellationToken cancellationToken = default) => await this.SendMessageAsync<ResponsePatientReferralResults>(request, cancellationToken);
+        public async Task<ResponsePatientReferralResults> GetPatientReferralResultsAsync(RequestPatientReferralResults request, CancellationToken cancellationToken = default) => 
+            await this.SendMessageAsync<ResponsePatientReferralResults>(request, cancellationToken).ConfigureAwait(false);
 
-        public async Task<ResponseDictionariesVersion> GetDictionariesVersionAsync(RequestDictionariesVersion request, CancellationToken cancellationToken = default) => await this.SendMessageAsync<ResponseDictionariesVersion>(request, cancellationToken);
+        public async Task<ResponseDictionariesVersion> GetDictionariesVersionAsync(RequestDictionariesVersion request, CancellationToken cancellationToken = default) => 
+            await this.SendMessageAsync<ResponseDictionariesVersion>(request, cancellationToken).ConfigureAwait(false);
 
-        public async Task<ResponseDictionaries> GetDictionariesAsync(RequestDictionaries request, CancellationToken cancellationToken = default) => await this.SendMessageAsync<ResponseDictionaries>(request, cancellationToken);
+        public async Task<ResponseDictionaries> GetDictionariesAsync(RequestDictionaries request, CancellationToken cancellationToken = default) => 
+            await this.SendMessageAsync<ResponseDictionaries>(request, cancellationToken).ConfigureAwait(false);
 
-        public async Task<ResponsePreprintBarcodes> GetPreprintBarcodesAsync(RequestPreprintBarcodes request, CancellationToken cancellationToken = default) => await this.SendMessageAsync<ResponsePreprintBarcodes>(request, cancellationToken);
+        public async Task<ResponsePreprintBarcodes> GetPreprintBarcodesAsync(RequestPreprintBarcodes request, CancellationToken cancellationToken = default) => 
+            await this.SendMessageAsync<ResponsePreprintBarcodes>(request, cancellationToken).ConfigureAwait(false);
     }
 }
