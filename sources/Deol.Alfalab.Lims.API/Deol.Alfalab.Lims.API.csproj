@@ -4,11 +4,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Oleg Devyatkin</Authors>
     <Description>Alfalab LIMS API Client for .NET</Description>
-    <Copyright>2020</Copyright>
+    <Copyright>Copyright ©  2020, Oleg Devyatkin</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/deoldeveloper/Deol.Alfalab.Lims.API</PackageProjectUrl>
-    <PackageReleaseNotes>This is initial release</PackageReleaseNotes>
+    <PackageReleaseNotes>Add ClientOptions, CancellationToken Parameter, ConfigureAwait</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.1.0</Version>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
   </PropertyGroup>
 
 </Project>
