@@ -16,7 +16,7 @@ namespace Deol.Alfalab.Lims.API.Messages
         public RequestNextReferralResults(AuthorizationData authorizationData) : base(authorizationData) { }
 
         protected override IEnumerable<XElement> GetMessageElements() => 
-            this.Query.IsEmpty ? Enumerable.Empty<XElement>() : new XElement[] { this.Query.ToXMLElement() };
+            Query.IsEmpty ? Enumerable.Empty<XElement>() : new XElement[] { Query.ToXMLElement() };
     }
 
     public class RequestElementQueueParameters : IRequestMessageElement
@@ -27,26 +27,26 @@ namespace Deol.Alfalab.Lims.API.Messages
         public string ModCount { get; set; }
 
         public bool IsEmpty =>
-            this.OnlyCreatedFromLis == null &&
-            this.AllowModified == null &&
-            this.ModValue == null &&
-            this.ModCount == null;
+            OnlyCreatedFromLis == null &&
+            AllowModified == null &&
+            ModValue == null &&
+            ModCount == null;
 
         public XElement ToXMLElement()
         {
             var element = new XElement("Query");
 
-            if (this.OnlyCreatedFromLis != null)
-                element.Add(new XAttribute("OnlyCreatedFromLis", MessageHelper.GetAttributeValue(this.OnlyCreatedFromLis.Value)));
+            if (OnlyCreatedFromLis != null)
+                element.Add(new XAttribute("OnlyCreatedFromLis", MessageHelper.GetAttributeValue(OnlyCreatedFromLis.Value)));
 
-            if (this.AllowModified != null)
-                element.Add(new XAttribute("AllowModified", MessageHelper.GetAttributeValue(this.AllowModified.Value)));
+            if (AllowModified != null)
+                element.Add(new XAttribute("AllowModified", MessageHelper.GetAttributeValue(AllowModified.Value)));
 
-            if (this.ModValue != null)
-                element.Add(new XAttribute("ModValue", this.ModValue));
+            if (ModValue != null)
+                element.Add(new XAttribute("ModValue", ModValue));
 
-            if (this.ModCount != null)
-                element.Add(new XAttribute("ModCount", this.ModCount));
+            if (ModCount != null)
+                element.Add(new XAttribute("ModCount", ModCount));
 
             return element;
         }

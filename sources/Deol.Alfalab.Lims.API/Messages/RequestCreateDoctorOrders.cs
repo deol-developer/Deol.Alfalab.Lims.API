@@ -8,22 +8,22 @@ namespace Deol.Alfalab.Lims.API.Messages
 {
     public class RequestCreateDoctorOrders : RequestMessage
     {
-        public bool UseUserFields => this.Referral.UseUserFields;
+        public bool UseUserFields => Referral.UseUserFields;
 
         public RequestCreateDoctorOrders(bool usePatientUserFields = false, bool useReferralUserFields = false)
             :base ()
         {
-            this.Pation = new RequestElementPation(usePatientUserFields);
+            Pation = new RequestElementPation(usePatientUserFields);
 
-            this.Referral = new RequestElementDoctorReferral(useReferralUserFields);
+            Referral = new RequestElementDoctorReferral(useReferralUserFields);
         }
 
         public RequestCreateDoctorOrders(AuthorizationData authorizationData, bool usePatientUserFields = false, bool useReferralUserFields = false)
             : base(authorizationData)
         {
-            this.Pation = new RequestElementPation(usePatientUserFields);
+            Pation = new RequestElementPation(usePatientUserFields);
 
-            this.Referral = new RequestElementDoctorReferral(useReferralUserFields);
+            Referral = new RequestElementDoctorReferral(useReferralUserFields);
         }
 
         public RequestElementPation Pation { get; }
@@ -34,8 +34,8 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         protected override IEnumerable<XElement> GetMessageElements() => new XElement[]
         {
-            this.Pation.ToXMLElement(),
-            this.Referral.ToXMLElement()
+            Pation.ToXMLElement(),
+            Referral.ToXMLElement()
         };
     }
 
@@ -51,10 +51,10 @@ namespace Deol.Alfalab.Lims.API.Messages
         {
             var element = base.ToXMLElement();
 
-            if (this.Date != null)
-                element.Add(new XAttribute("Date", MessageHelper.GetAttributeValue(this.Date.Value)));
+            if (Date != null)
+                element.Add(new XAttribute("Date", MessageHelper.GetAttributeValue(Date.Value)));
 
-            element.Add(new XElement("Orders", this.Orders.Select(x => x.ToXMLElement())));
+            element.Add(new XElement("Orders", Orders.Select(x => x.ToXMLElement())));
 
             return element;
         }
@@ -67,10 +67,10 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public XElement ToXMLElement()
         {
-            var element = new XElement("Item", new XAttribute("Code", MessageHelper.GetAttributeValue(this.Code)));
+            var element = new XElement("Item", new XAttribute("Code", MessageHelper.GetAttributeValue(Code)));
            
-            if (this.BiomaterialCode != null)
-                element.Add(new XAttribute("BiomaterialCode", this.BiomaterialCode));
+            if (BiomaterialCode != null)
+                element.Add(new XAttribute("BiomaterialCode", BiomaterialCode));
 
             return element;
         }

@@ -16,7 +16,7 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         protected override IEnumerable<XElement> GetMessageElements() => new XElement[]
         {
-            this.Query.ToXMLElement()
+            Query.ToXMLElement()
         };
     }
 }

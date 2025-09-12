@@ -9,7 +9,7 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         protected override void InitMessageElements(XElement message)
         {
-            this.Pool = MessageHelper.GetResponseMessageElement<ResponseElementPool>(message.Element("Pool"));
+            Pool = MessageHelper.GetResponseMessageElement<ResponseElementPool>(message.Element("Pool"));
         }
     }
 
@@ -23,15 +23,15 @@ namespace Deol.Alfalab.Lims.API.Messages
         public void InitFromXMLElement(XElement element)
         {
             if (int.TryParse(element.Attribute("Count")?.Value, out var count))
-                this.Count = count;
+                Count = count;
 
             if (long.TryParse(element.Attribute("FirstNr")?.Value, out var firstNr))
-                this.FirstNr = firstNr;
+                FirstNr = firstNr;
 
             if (long.TryParse(element.Attribute("LastNr")?.Value, out var lastNr))
-                this.LastNr = lastNr;
+                LastNr = lastNr;
 
-            this.HospitalCode = element.Attribute("HospitalCode")?.Value;
+            HospitalCode = element.Attribute("HospitalCode")?.Value;
         }
     }
 }

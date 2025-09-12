@@ -18,13 +18,13 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         protected override void InitMessageElements(XElement message)
         {
-            this.Version = MessageHelper.GetResponseMessageElement<ResponseElementVersion>(message.Element("Version"));
+            Version = MessageHelper.GetResponseMessageElement<ResponseElementVersion>(message.Element("Version"));
 
-            this.Patient = MessageHelper.GetResponseMessageElement<ResponseElementPatient>(message.Element("Patient"));
+            Patient = MessageHelper.GetResponseMessageElement<ResponseElementPatient>(message.Element("Patient"));
 
-            this.Referral = MessageHelper.GetResponseMessageElement<ResponseElementReferral>(message.Element("Referral"));
+            Referral = MessageHelper.GetResponseMessageElement<ResponseElementReferral>(message.Element("Referral"));
 
-            this.Blanks = MessageHelper.GetResponseMessageElements<ResponseElementBlank>(message.Element("Blanks"));
+            Blanks = MessageHelper.GetResponseMessageElements<ResponseElementBlank>(message.Element("Blanks"));
         }
     }
 
@@ -46,21 +46,21 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public void InitFromXMLElement(XElement element)
         {
-            this.MisId      = element.Attribute("MisId")?.Value;
-            this.Code1      = element.Attribute("Code1")?.Value;
-            this.Code2      = element.Attribute("Code2")?.Value;
-            this.LastName   = element.Attribute("LastName")?.Value;
-            this.FirstName  = element.Attribute("FirstName")?.Value;
-            this.MiddleName = element.Attribute("MiddleName")?.Value;
+            MisId      = element.Attribute("MisId")?.Value;
+            Code1      = element.Attribute("Code1")?.Value;
+            Code2      = element.Attribute("Code2")?.Value;
+            LastName   = element.Attribute("LastName")?.Value;
+            FirstName  = element.Attribute("FirstName")?.Value;
+            MiddleName = element.Attribute("MiddleName")?.Value;
 
             if (int.TryParse(element.Attribute("Gender")?.Value, out var gender))
-                this.Gender = IntToGender(gender);
+                Gender = IntToGender(gender);
 
             if (DateTime.TryParseExact(element.Attribute("BirthDate")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var birthDate))
-                this.BirthDate = birthDate;
+                BirthDate = birthDate;
 
             if (int.TryParse(element.Attribute("BirthYear")?.Value, out var birthYear))
-                this.BirthYear = birthYear;
+                BirthYear = birthYear;
 
             PationGender IntToGender(int gen)
             {
@@ -104,43 +104,43 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public void InitFromXMLElement(XElement element)
         {
-            this.MisId = element.Attribute("MisId")?.Value;
+            MisId = element.Attribute("MisId")?.Value;
             
-            this.Nr = element.Attribute("Nr")?.Value;
+            Nr = element.Attribute("Nr")?.Value;
             
             if (int.TryParse(element.Attribute("LisId")?.Value, out var lisId))
-                this.LisId = lisId;
+                LisId = lisId;
 
             if (int.TryParse(element.Attribute("MasterLisId")?.Value, out var masterLisId))
-                this.MasterLisId = masterLisId;
+                MasterLisId = masterLisId;
 
             if (DateTime.TryParseExact(element.Attribute("Date")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var date))
-                this.Date = date;
+                Date = date;
 
             if (DateTime.TryParseExact(element.Attribute("SamplingDate")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var samplingeDate))
-                this.SamplingDate = samplingeDate;
+                SamplingDate = samplingeDate;
 
             if (DateTime.TryParseExact(element.Attribute("DeliveryDate")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var deliveryDate))
-                this.DeliveryDate = deliveryDate;
+                DeliveryDate = deliveryDate;
 
-            this.Removed = Convert.ToBoolean(element.Attribute("Removed")?.Value);
+            Removed = Convert.ToBoolean(element.Attribute("Removed")?.Value);
             
-            this.Done = Convert.ToBoolean(element.Attribute("Done")?.Value);
+            Done = Convert.ToBoolean(element.Attribute("Done")?.Value);
 
             if (DateTime.TryParseExact(element.Attribute("CreateDate")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var createDate))
-                this.CreateDate = createDate;
+                CreateDate = createDate;
 
             if (DateTime.TryParseExact(element.Attribute("DoneDate")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var doneDate))
-                this.DoneDate = doneDate;
+                DoneDate = doneDate;
 
             if (DateTime.TryParseExact(element.Attribute("MinPlanDate")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var minPlanDate))
-                this.MinPlanDate = minPlanDate;
+                MinPlanDate = minPlanDate;
 
             if (DateTime.TryParseExact(element.Attribute("MaxPlanDate")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var maxPlanDate))
-                this.MaxPlanDate = maxPlanDate;
+                MaxPlanDate = maxPlanDate;
 
             if (int.TryParse(element.Attribute("Activated")?.Value, out var activated))
-                this.Activated = IntToReferralActivated(activated);
+                Activated = IntToReferralActivated(activated);
 
             ReferralActivated IntToReferralActivated(int activatedInt)
             {
@@ -153,9 +153,9 @@ namespace Deol.Alfalab.Lims.API.Messages
                 }
             }
 
-            this.Manual = Convert.ToBoolean(element.Attribute("Manual")?.Value);
+            Manual = Convert.ToBoolean(element.Attribute("Manual")?.Value);
 
-            this.Orders = MessageHelper.GetResponseMessageElements<ResponseElementReferralOrder>(element.Element("Orders"));
+            Orders = MessageHelper.GetResponseMessageElements<ResponseElementReferralOrder>(element.Element("Orders"));
         }
     }
 
@@ -192,11 +192,11 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public void InitFromXMLElement(XElement element)
         {
-            this.Code = element.Attribute("Code")?.Value;
-            this.BiomaterialCode = element.Attribute("BiomaterialCode")?.Value;
+            Code = element.Attribute("Code")?.Value;
+            BiomaterialCode = element.Attribute("BiomaterialCode")?.Value;
 
             if (int.TryParse(element.Attribute("State")?.Value, out var state))
-                this.State = IntToReferralOrderState(state);
+                State = IntToReferralOrderState(state);
 
             ReferralOrderState IntToReferralOrderState(int stateInt)
             {
@@ -210,24 +210,24 @@ namespace Deol.Alfalab.Lims.API.Messages
                 }
             }
 
-            this.PlaceCode = element.Attribute("PlaceCode")?.Value;
-            this.Defected = Convert.ToBoolean(element.Attribute("Defected")?.Value);
-            this.Defects = element.Attribute("Defects")?.Value;
-            this.DefectCode = element.Attribute("DefectCode")?.Value;
-            this.MisId = element.Attribute("MisId")?.Value;
+            PlaceCode = element.Attribute("PlaceCode")?.Value;
+            Defected = Convert.ToBoolean(element.Attribute("Defected")?.Value);
+            Defects = element.Attribute("Defects")?.Value;
+            DefectCode = element.Attribute("DefectCode")?.Value;
+            MisId = element.Attribute("MisId")?.Value;
 
             if (DateTime.TryParseExact(element.Attribute("DoneDate")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var doneDate))
-                this.DoneOrApproveDate = doneDate;
+                DoneOrApproveDate = doneDate;
 
-            this.DoctorName = element.Attribute("DoctorName")?.Value;
-            this.DoctorCode = element.Attribute("DoctorCode")?.Value;
-            this.DoctorProf = element.Attribute("DoctorProf")?.Value;
-            this.DoctorSnils = element.Attribute("DoctorSnils")?.Value;
-            this.DoctorExportCode = element.Attribute("DoctorExportCode")?.Value;
-            this.DoctorExportCode2 = element.Attribute("DoctorExportCode2")?.Value;
-            this.DoctorRoleCode = element.Attribute("DoctorRoleCode")?.Value;
-            this.DoctorSpecialityCode = element.Attribute("DoctorSpecialityCode")?.Value;
-            this.DoctorHospitalExportCode = element.Attribute("DoctorHospitalExportCode")?.Value;
+            DoctorName = element.Attribute("DoctorName")?.Value;
+            DoctorCode = element.Attribute("DoctorCode")?.Value;
+            DoctorProf = element.Attribute("DoctorProf")?.Value;
+            DoctorSnils = element.Attribute("DoctorSnils")?.Value;
+            DoctorExportCode = element.Attribute("DoctorExportCode")?.Value;
+            DoctorExportCode2 = element.Attribute("DoctorExportCode2")?.Value;
+            DoctorRoleCode = element.Attribute("DoctorRoleCode")?.Value;
+            DoctorSpecialityCode = element.Attribute("DoctorSpecialityCode")?.Value;
+            DoctorHospitalExportCode = element.Attribute("DoctorHospitalExportCode")?.Value;
         }
     }
 
@@ -257,31 +257,31 @@ namespace Deol.Alfalab.Lims.API.Messages
         public void InitFromXMLElement(XElement element)
         {
             if (int.TryParse(element.Attribute("BlankId")?.Value, out var blankId))
-                this.BlankId = blankId;
+                BlankId = blankId;
 
-            this.BlankGUID = element.Attribute("BlankGUID")?.Value;
+            BlankGUID = element.Attribute("BlankGUID")?.Value;
 
             if (int.TryParse(element.Attribute("Version")?.Value, out var version))
-                this.Version = version;
+                Version = version;
 
-            this.Name = element.Attribute("Name")?.Value;
-            this.Groups = element.Attribute("Groups")?.Value;
-            this.Done = Convert.ToBoolean(element.Attribute("Done")?.Value);
+            Name = element.Attribute("Name")?.Value;
+            Groups = element.Attribute("Groups")?.Value;
+            Done = Convert.ToBoolean(element.Attribute("Done")?.Value);
 
             if (DateTime.TryParseExact(element.Attribute("DoneDate")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var doneDate))
-                this.DoneDate = doneDate;
+                DoneDate = doneDate;
 
-            this.Comment = element.Attribute("Comment")?.Value;
+            Comment = element.Attribute("Comment")?.Value;
 
             if (DateTime.TryParseExact(element.Attribute("MinPlanDate")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var minPlaneDate))
-                this.MinPlanDate = minPlaneDate;
+                MinPlanDate = minPlaneDate;
 
             if (DateTime.TryParseExact(element.Attribute("MaxPlanDate")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var maxPlaneDate))
-                this.MaxPlanDate = maxPlaneDate;
+                MaxPlanDate = maxPlaneDate;
 
-            this.FileName = element.Attribute("FileName")?.Value;
+            FileName = element.Attribute("FileName")?.Value;
 
-            this.Tests = MessageHelper.GetResponseMessageElements<ResponseElementBlankTest>(element.Element("Tests"));
+            Tests = MessageHelper.GetResponseMessageElements<ResponseElementBlankTest>(element.Element("Tests"));
         }
     }
 
@@ -352,29 +352,29 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public void InitFromXMLElement(XElement element)
         {
-            this.Name = element.Attribute("Name")?.Value;
-            this.Code = element.Attribute("Code")?.Value;
-            this.GroupName = element.Attribute("GroupName")?.Value;
-            this.GroupCode = element.Attribute("GroupCode")?.Value;
+            Name = element.Attribute("Name")?.Value;
+            Code = element.Attribute("Code")?.Value;
+            GroupName = element.Attribute("GroupName")?.Value;
+            GroupCode = element.Attribute("GroupCode")?.Value;
             
             if (int.TryParse(element.Attribute("GroupRank")?.Value, out var groupRank))
-                this.GroupRank = groupRank;
+                GroupRank = groupRank;
 
             if (int.TryParse(element.Attribute("TestGroupRank")?.Value, out var testGroupRank))
-                this.TestGroupRank = testGroupRank;
+                TestGroupRank = testGroupRank;
 
-            this.OrderCode = element.Attribute("OrderCode")?.Value;
-            this.BiomaterialCode = element.Attribute("BiomaterialCode")?.Value;
-            this.Barcode = element.Attribute("Barcode")?.Value;
-            this.Value = element.Attribute("Value")?.Value;
+            OrderCode = element.Attribute("OrderCode")?.Value;
+            BiomaterialCode = element.Attribute("BiomaterialCode")?.Value;
+            Barcode = element.Attribute("Barcode")?.Value;
+            Value = element.Attribute("Value")?.Value;
             
             if (DateTime.TryParseExact(element.Attribute("ValueDate")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var valueDate))
-                this.ValueDate = valueDate;
+                ValueDate = valueDate;
 
-            this.Cancelled = Convert.ToBoolean(element.Attribute("Cancelled")?.Value);
+            Cancelled = Convert.ToBoolean(element.Attribute("Cancelled")?.Value);
 
             if (int.TryParse(element.Attribute("ValueType")?.Value, out var valueType))
-                this.ValueType = IntToBlankTestValueType(valueType);
+                ValueType = IntToBlankTestValueType(valueType);
 
             BlankTestValueType IntToBlankTestValueType(int valueTypeInt)
             {
@@ -388,17 +388,17 @@ namespace Deol.Alfalab.Lims.API.Messages
                 }
             }
 
-            this.BinaryDataFormat = element.Attribute("BinaryDataFormat")?.Value;
-            this.BinaryDataBase64 = element.Attribute("BinaryDataBase64")?.Value;
-            this.IsMicro = Convert.ToBoolean(element.Attribute("IsMicro")?.Value);
-            this.UnitName = element.Attribute("UnitName")?.Value;
-            this.Defected = Convert.ToBoolean(element.Attribute("Defected")?.Value);
-            this.Defects = element.Attribute("Defects")?.Value;
-            this.DefectCode = element.Attribute("DefectCode")?.Value;
-            this.Comment = element.Attribute("Comment")?.Value;
+            BinaryDataFormat = element.Attribute("BinaryDataFormat")?.Value;
+            BinaryDataBase64 = element.Attribute("BinaryDataBase64")?.Value;
+            IsMicro = Convert.ToBoolean(element.Attribute("IsMicro")?.Value);
+            UnitName = element.Attribute("UnitName")?.Value;
+            Defected = Convert.ToBoolean(element.Attribute("Defected")?.Value);
+            Defects = element.Attribute("Defects")?.Value;
+            DefectCode = element.Attribute("DefectCode")?.Value;
+            Comment = element.Attribute("Comment")?.Value;
 
             if (int.TryParse(element.Attribute("NormsFlag")?.Value, out var normsFlag))
-                this.NormsFlag = IntToNormsFlag(normsFlag);
+                NormsFlag = IntToNormsFlag(normsFlag);
 
             BlankTestNormsFlag IntToNormsFlag(int normsFlagInt)
             {
@@ -415,37 +415,36 @@ namespace Deol.Alfalab.Lims.API.Messages
                 }
             }
 
-
-            this.NormsComment = element.Attribute("NormsComment")?.Value;
-            this.Norms = element.Attribute("Norms")?.Value;
+            NormsComment = element.Attribute("NormsComment")?.Value;
+            Norms = element.Attribute("Norms")?.Value;
             
             if (float.TryParse(element.Attribute("NormPoint1")?.Value, out var normPoint1))
-                this.NormPoint1 = normPoint1;
+                NormPoint1 = normPoint1;
 
             if (float.TryParse(element.Attribute("NormPoint2")?.Value, out var normPoint2))
-                this.NormPoint2 = normPoint2;
+                NormPoint2 = normPoint2;
 
             if (float.TryParse(element.Attribute("NormPoint3")?.Value, out var normPoint3))
-                this.NormPoint3 = normPoint3;
+                NormPoint3 = normPoint3;
 
             if (float.TryParse(element.Attribute("NormPoint4")?.Value, out var normPoint4))
-                this.NormPoint4 = normPoint4;
+                NormPoint4 = normPoint4;
 
-            this.Source = element.Attribute("Source")?.Value;
-            this.DoctorName = element.Attribute("DoctorName")?.Value;
-            this.DoctorCode = element.Attribute("DoctorCode")?.Value;
-            this.DoctorProf = element.Attribute("DoctorProf")?.Value;
-            this.DoctorSnils = element.Attribute("DoctorSnils")?.Value;
-            this.DoctorExportCode = element.Attribute("DoctorExportCode")?.Value;
-            this.DoctorExportCode2 = element.Attribute("DoctorExportCode2")?.Value;
-            this.DoctorRoleCode = element.Attribute("DoctorRoleCode")?.Value;
-            this.DoctorSpecialityCode = element.Attribute("DoctorSpecialityCode")?.Value;
-            this.DoctorHospitalExportCode = element.Attribute("DoctorHospitalExportCode")?.Value;
-            this.AssistantName = element.Attribute("AssistantName")?.Value;
-            this.AssistantCode = element.Attribute("AssistantCode")?.Value;
-            this.AssistantProf = element.Attribute("AssistantProf")?.Value;
+            Source = element.Attribute("Source")?.Value;
+            DoctorName = element.Attribute("DoctorName")?.Value;
+            DoctorCode = element.Attribute("DoctorCode")?.Value;
+            DoctorProf = element.Attribute("DoctorProf")?.Value;
+            DoctorSnils = element.Attribute("DoctorSnils")?.Value;
+            DoctorExportCode = element.Attribute("DoctorExportCode")?.Value;
+            DoctorExportCode2 = element.Attribute("DoctorExportCode2")?.Value;
+            DoctorRoleCode = element.Attribute("DoctorRoleCode")?.Value;
+            DoctorSpecialityCode = element.Attribute("DoctorSpecialityCode")?.Value;
+            DoctorHospitalExportCode = element.Attribute("DoctorHospitalExportCode")?.Value;
+            AssistantName = element.Attribute("AssistantName")?.Value;
+            AssistantCode = element.Attribute("AssistantCode")?.Value;
+            AssistantProf = element.Attribute("AssistantProf")?.Value;
 
-            this.Microorganisms = MessageHelper.GetResponseMessageElements<ResponseElementBlankMicroorganism>(element.Element("Microorganisms"));
+            Microorganisms = MessageHelper.GetResponseMessageElements<ResponseElementBlankMicroorganism>(element.Element("Microorganisms"));
         }
     }
 
@@ -461,13 +460,13 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public void InitFromXMLElement(XElement element)
         {
-            this.Name = element.Attribute("Name")?.Value;
-            this.Code = element.Attribute("Code")?.Value;
-            this.Found = Convert.ToBoolean(element.Attribute("Found")?.Value);
-            this.Value = element.Attribute("Value")?.Value;
-            this.UnitName = element.Attribute("UnitName")?.Value;
+            Name = element.Attribute("Name")?.Value;
+            Code = element.Attribute("Code")?.Value;
+            Found = Convert.ToBoolean(element.Attribute("Found")?.Value);
+            Value = element.Attribute("Value")?.Value;
+            UnitName = element.Attribute("UnitName")?.Value;
 
-            this.Drugs = MessageHelper.GetResponseMessageElements<ResponseElementBlankDrug>(element.Element("Drugs"));
+            Drugs = MessageHelper.GetResponseMessageElements<ResponseElementBlankDrug>(element.Element("Drugs"));
         }
     }
 
@@ -482,15 +481,15 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public void InitFromXMLElement(XElement element)
         {
-            this.Name = element.Attribute("Name")?.Value;
-            this.Code = element.Attribute("Code")?.Value;
-            this.Value = element.Attribute("Value")?.Value;
+            Name = element.Attribute("Name")?.Value;
+            Code = element.Attribute("Code")?.Value;
+            Value = element.Attribute("Value")?.Value;
 
             if (DateTime.TryParseExact(element.Attribute("ValueDate")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var valueDate))
-                this.ValueDate = valueDate;
+                ValueDate = valueDate;
 
-            this.MIC = element.Attribute("MIC")?.Value;
-            this.Diameter = element.Attribute("Diameter")?.Value;
+            MIC = element.Attribute("MIC")?.Value;
+            Diameter = element.Attribute("Diameter")?.Value;
         }
     }
 }

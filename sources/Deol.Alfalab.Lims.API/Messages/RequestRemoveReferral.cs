@@ -16,7 +16,7 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         protected override IEnumerable<XElement> GetMessageElements() => new XElement[]
         {
-            this.Query.ToXMLElement()
+            Query.ToXMLElement()
         };
     }
 
@@ -24,16 +24,16 @@ namespace Deol.Alfalab.Lims.API.Messages
     {
         private string ElementName { get; }
 
-        public RequestElementReferralId(string elementName = "Query") => this.ElementName = elementName;
+        public RequestElementReferralId(string elementName = "Query") => ElementName = elementName;
 
         public string MisId { get; set; }
         public string Nr { get; set; }
         public int? LisId { get; set; }
 
         public XElement ToXMLElement() => 
-            new XElement(this.ElementName, 
-                new XAttribute("LisId", MessageHelper.GetAttributeValue(this.LisId)), 
-                new XAttribute("MisId", MessageHelper.GetAttributeValue(this.MisId)),
-                new XAttribute("Nr",    MessageHelper.GetAttributeValue(this.Nr)));
+            new XElement(ElementName, 
+                new XAttribute("LisId", MessageHelper.GetAttributeValue(LisId)), 
+                new XAttribute("MisId", MessageHelper.GetAttributeValue(MisId)),
+                new XAttribute("Nr",    MessageHelper.GetAttributeValue(Nr)));
     }
 }

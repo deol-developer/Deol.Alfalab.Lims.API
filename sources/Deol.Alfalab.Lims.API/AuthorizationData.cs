@@ -8,9 +8,9 @@
 
         public AuthorizationData (string sender, string receiver, string password)
         {
-            this.Sender = sender;
-            this.Receiver = receiver;
-            this.Password = password;
+            Sender = sender;
+            Receiver = receiver;
+            Password = password;
         }
     }
 }

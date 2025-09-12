@@ -16,7 +16,7 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         protected override IEnumerable<XElement> GetMessageElements() => new XElement[]
         {
-            this.Query.ToXMLElement()
+            Query.ToXMLElement()
         };
     }
 
@@ -30,11 +30,11 @@ namespace Deol.Alfalab.Lims.API.Messages
         {
             var element = new XElement("Query");
 
-            if (this.BlankId != null)
-                element.Add(new XAttribute("BlankId", this.BlankId.Value));
+            if (BlankId != null)
+                element.Add(new XAttribute("BlankId", BlankId.Value));
 
-            if (this.BlankGUID != null)
-                element.Add(new XAttribute("BlankGUID", this.BlankGUID));
+            if (BlankGUID != null)
+                element.Add(new XAttribute("BlankGUID", BlankGUID));
 
             return element;
         }

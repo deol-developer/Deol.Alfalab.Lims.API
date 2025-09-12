@@ -6,26 +6,26 @@ namespace Deol.Alfalab.Lims.API.Messages
     {
         public ResponseMessage Message { get; private set; }
 
-        public bool HasMessage => this.Message != null;
+        public bool HasMessage => Message != null;
 
         public void InitMessage(string xmlMessage)
         {
-            this.Message = new ResponseMessage();
-            this.Message.InitFromXMLMessage(xmlMessage);
+            Message = new ResponseMessage();
+            Message.InitFromXMLMessage(xmlMessage);
         }
 
         public byte[] BinaryData { get; private set; }
 
-        public bool HasBinaryData => this.BinaryData != null;
+        public bool HasBinaryData => BinaryData != null;
 
         public string FileExtension { get; private set; }
 
-        public bool HasFileExtension => !string.IsNullOrEmpty(this.FileExtension);
+        public bool HasFileExtension => !string.IsNullOrEmpty(FileExtension);
 
         public void InitBinaryData(byte[] binaryData, string fileExtension)
         {
-            this.BinaryData = binaryData;
-            this.FileExtension = fileExtension;
+            BinaryData = binaryData;
+            FileExtension = fileExtension;
         }
     }
 }

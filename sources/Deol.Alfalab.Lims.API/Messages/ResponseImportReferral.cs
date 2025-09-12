@@ -12,9 +12,9 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         protected override void InitMessageElements(XElement message)
         {
-            this.Referral = MessageHelper.GetResponseMessageElement<ResponseElementReferralId>(message.Element("Referral"));
+            Referral = MessageHelper.GetResponseMessageElement<ResponseElementReferralId>(message.Element("Referral"));
 
-            this.Containers = MessageHelper.GetResponseMessageElements<ResponseElementContainer>(message.Element("Containers"));
+            Containers = MessageHelper.GetResponseMessageElements<ResponseElementContainer>(message.Element("Containers"));
         }
     }
 
@@ -27,10 +27,10 @@ namespace Deol.Alfalab.Lims.API.Messages
         public void InitFromXMLElement(XElement element)
         {
             if (int.TryParse(element.Attribute("LisId")?.Value, out var lisId))
-                this.LisId = lisId;
+                LisId = lisId;
 
-            this.MisId  = element.Attribute("MisId")?.Value;
-            this.Nr     = element.Attribute("Nr")?.Value;
+            MisId  = element.Attribute("MisId")?.Value;
+            Nr     = element.Attribute("Nr")?.Value;
         }
     }
 
@@ -46,20 +46,20 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public void InitFromXMLElement(XElement element)
         {
-            this.Name = element.Attribute("Name")?.Value;
-            this.Code = element.Attribute("Code")?.Value;
-            this.ShortName = element.Attribute("ShortName")?.Value;
+            Name = element.Attribute("Name")?.Value;
+            Code = element.Attribute("Code")?.Value;
+            ShortName = element.Attribute("ShortName")?.Value;
 
             if (int.TryParse(element.Attribute("Rank")?.Value, out var rank))
-                this.Rank = rank;
+                Rank = rank;
 
             if (int.TryParse(element.Attribute("ImageIndex")?.Value, out var imageIndex))
-                this.ImageIndex = imageIndex;
+                ImageIndex = imageIndex;
 
-            this.Comment = element.Attribute("Comment")?.Value;
+            Comment = element.Attribute("Comment")?.Value;
 
             if (int.TryParse(element.Attribute("PlanCount")?.Value, out var planCount))
-                this.PlanCount = planCount;
+                PlanCount = planCount;
         }
     }
 }

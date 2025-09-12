@@ -10,30 +10,30 @@ namespace Deol.Alfalab.Lims.API.Messages
     {
         public bool ForUpdate { get; }
 
-        public bool UseUserFields => this.Referral.UseUserFields;
+        public bool UseUserFields => Referral.UseUserFields;
 
         public RequestCreateOrUpdateReferral(bool usePatientUserFields = false, bool useReferralUserFields = false, bool forUpdate = false) 
             : base()
         {
-            this.ForUpdate = forUpdate;
+            ForUpdate = forUpdate;
 
-            this.Pation = new RequestElementPation(usePatientUserFields);
+            Pation = new RequestElementPation(usePatientUserFields);
 
-            this.Referral = new RequestElementReferral(useReferralUserFields);
+            Referral = new RequestElementReferral(useReferralUserFields);
 
-            this.Assays = new List<RequestElementAssay>();
+            Assays = new List<RequestElementAssay>();
         }
 
         public RequestCreateOrUpdateReferral(AuthorizationData authorizationData, bool usePatientUserFields = false, bool useReferralUserFields = false, bool forUpdate = false)
             : base(authorizationData)
         {
-            this.ForUpdate = forUpdate;
+            ForUpdate = forUpdate;
 
-            this.Pation = new RequestElementPation(usePatientUserFields);
+            Pation = new RequestElementPation(usePatientUserFields);
 
-            this.Referral = new RequestElementReferral(useReferralUserFields);
+            Referral = new RequestElementReferral(useReferralUserFields);
 
-            this.Assays = new List<RequestElementAssay>();
+            Assays = new List<RequestElementAssay>();
         }
 
         public RequestElementPation Pation { get; }
@@ -42,18 +42,18 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public ICollection<RequestElementAssay> Assays { get; }
 
-        public override string MessageType => this.ForUpdate ? "query-edit-referral" : "query-create-referral";
+        public override string MessageType => ForUpdate ? "query-edit-referral" : "query-create-referral";
 
         protected override IEnumerable<XElement> GetMessageElements()
         {
             var elements = new List<XElement>(3)
             {
-                this.Pation.ToXMLElement(),
-                this.Referral.ToXMLElement()
+                Pation.ToXMLElement(),
+                Referral.ToXMLElement()
             };
 
-            if (this.Assays.Any())
-                elements.Add(new XElement("Assays", this.Assays.Select(x => x.ToXMLElement())));
+            if (Assays.Any())
+                elements.Add(new XElement("Assays", Assays.Select(x => x.ToXMLElement())));
 
             return elements;
         }
@@ -86,10 +86,10 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public RequestElementPation(bool useUserFields = false)
         {
-            this.UseUserFields = useUserFields;
+            UseUserFields = useUserFields;
 
             if (useUserFields)
-                this.UserFields = new Dictionary<string, string>();
+                UserFields = new Dictionary<string, string>();
         }
 
         public string MisId { get; set; }
@@ -110,35 +110,35 @@ namespace Deol.Alfalab.Lims.API.Messages
         {
             var element = new XElement("Patient");
 
-            if (this.MisId != null)
-                element.Add(new XAttribute("MisId", this.MisId));
+            if (MisId != null)
+                element.Add(new XAttribute("MisId", MisId));
 
-            if (this.Code1 != null)
-                element.Add(new XAttribute("Code1", this.Code1));
+            if (Code1 != null)
+                element.Add(new XAttribute("Code1", Code1));
 
-            if (this.Code2 != null)
-                element.Add(new XAttribute("Code2", this.Code2));
+            if (Code2 != null)
+                element.Add(new XAttribute("Code2", Code2));
 
-            if (this.LastName != null)
-                element.Add(new XAttribute("LastName", this.LastName));
+            if (LastName != null)
+                element.Add(new XAttribute("LastName", LastName));
 
-            if (this.FirstName != null)
-                element.Add(new XAttribute("FirstName", this.FirstName));
+            if (FirstName != null)
+                element.Add(new XAttribute("FirstName", FirstName));
 
-            if (this.LastName != null)
-                element.Add(new XAttribute("MiddleName", this.MiddleName));
+            if (LastName != null)
+                element.Add(new XAttribute("MiddleName", MiddleName));
 
-            if (this.Gender != null)
-                element.Add(new XAttribute("Gender", (int)this.Gender));
+            if (Gender != null)
+                element.Add(new XAttribute("Gender", (int)Gender));
 
-            if (this.BirthDate != null)
-                element.Add(new XAttribute("BirthDate", MessageHelper.GetAttributeValue(this.BirthDate.Value)));
+            if (BirthDate != null)
+                element.Add(new XAttribute("BirthDate", MessageHelper.GetAttributeValue(BirthDate.Value)));
 
-            if (this.BirthYear != null)
-                element.Add(new XAttribute("BirthYear", this.BirthYear.Value));
+            if (BirthYear != null)
+                element.Add(new XAttribute("BirthYear", BirthYear.Value));
 
-            if (this.UseUserFields)
-                foreach (var userField in this.UserFields)
+            if (UseUserFields)
+                foreach (var userField in UserFields)
                     element.Add(new XAttribute(userField.Key, userField.Value));
 
             return element;
@@ -152,10 +152,10 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public RequestElementBaseReferral(bool useUserFields = false)
         {
-            this.UseUserFields = useUserFields;
+            UseUserFields = useUserFields;
 
             if (useUserFields)
-                this.UserFields = new Dictionary<string, string>();
+                UserFields = new Dictionary<string, string>();
         }
 
         public string MisId { get; set; }
@@ -181,62 +181,62 @@ namespace Deol.Alfalab.Lims.API.Messages
         {
             var element = new XElement("Referral");
 
-            if (this.MisId != null)
-                element.Add(new XAttribute("MisId", this.MisId));
+            if (MisId != null)
+                element.Add(new XAttribute("MisId", MisId));
 
-            if (this.Nr != null)
-                element.Add(new XAttribute("Nr", this.Nr));
+            if (Nr != null)
+                element.Add(new XAttribute("Nr", Nr));
 
-            if (this.HospitalCode != null)
-                element.Add(new XAttribute("HospitalCode", this.HospitalCode));
+            if (HospitalCode != null)
+                element.Add(new XAttribute("HospitalCode", HospitalCode));
 
-            if (this.DepartmentName != null)
-                element.Add(new XAttribute("DepartmentName", this.DepartmentName));
+            if (DepartmentName != null)
+                element.Add(new XAttribute("DepartmentName", DepartmentName));
 
-            if (this.DepartmentCode != null)
-                element.Add(new XAttribute("DepartmentCode", this.DepartmentCode));
+            if (DepartmentCode != null)
+                element.Add(new XAttribute("DepartmentCode", DepartmentCode));
 
-            if (this.DoctorName != null)
-                element.Add(new XAttribute("DoctorName", this.DoctorName));
+            if (DoctorName != null)
+                element.Add(new XAttribute("DoctorName", DoctorName));
 
-            if (this.DoctorSpecialization != null)
-                element.Add(new XAttribute("DoctorSpecialization", this.DoctorSpecialization));
+            if (DoctorSpecialization != null)
+                element.Add(new XAttribute("DoctorSpecialization", DoctorSpecialization));
 
-            if (this.DoctorCode != null)
-                element.Add(new XAttribute("DoctorCode", this.DoctorCode));
+            if (DoctorCode != null)
+                element.Add(new XAttribute("DoctorCode", DoctorCode));
 
-            if (this.Cito != null)
-                element.Add(new XAttribute("Cito", MessageHelper.GetAttributeValue(this.Cito.Value)));
+            if (Cito != null)
+                element.Add(new XAttribute("Cito", MessageHelper.GetAttributeValue(Cito.Value)));
 
-            if (this.DiagnosisName != null)
-                element.Add(new XAttribute("DiagnosisName", this.DiagnosisName));
+            if (DiagnosisName != null)
+                element.Add(new XAttribute("DiagnosisName", DiagnosisName));
 
-            if (this.DiagnosisCode != null)
-                element.Add(new XAttribute("DiagnosisCode", this.DiagnosisCode));
+            if (DiagnosisCode != null)
+                element.Add(new XAttribute("DiagnosisCode", DiagnosisCode));
 
-            if (this.Comment != null)
-                element.Add(new XAttribute("Comment", this.Comment));
+            if (Comment != null)
+                element.Add(new XAttribute("Comment", Comment));
 
-            if (this.PregnancyWeek != null)
-                element.Add(new XAttribute("PregnancyWeek", this.PregnancyWeek.Value));
+            if (PregnancyWeek != null)
+                element.Add(new XAttribute("PregnancyWeek", PregnancyWeek.Value));
 
-            if (this.CyclePeriod != null)
-                element.Add(new XAttribute("CyclePeriod", (int)this.CyclePeriod.Value));
+            if (CyclePeriod != null)
+                element.Add(new XAttribute("CyclePeriod", (int)CyclePeriod.Value));
 
-            if (this.LastMenstruation != null)
-                element.Add(new XAttribute("LastMenstruation", MessageHelper.GetAttributeValue(this.LastMenstruation.Value)));
+            if (LastMenstruation != null)
+                element.Add(new XAttribute("LastMenstruation", MessageHelper.GetAttributeValue(LastMenstruation.Value)));
 
-            if (this.DiuresisMl != null)
-                element.Add(new XAttribute("DiuresisMl", this.DiuresisMl.Value));
+            if (DiuresisMl != null)
+                element.Add(new XAttribute("DiuresisMl", DiuresisMl.Value));
 
-            if (this.WeightKg != null)
-                element.Add(new XAttribute("WeightKg", this.WeightKg.Value));
+            if (WeightKg != null)
+                element.Add(new XAttribute("WeightKg", WeightKg.Value));
 
-            if (this.HeightCm != null)
-                element.Add(new XAttribute("HeightCm", this.HeightCm.Value));
+            if (HeightCm != null)
+                element.Add(new XAttribute("HeightCm", HeightCm.Value));
 
-            if (this.UseUserFields)
-                foreach (var userField in this.UserFields)
+            if (UseUserFields)
+                foreach (var userField in UserFields)
                     element.Add(new XAttribute(userField.Key, userField.Value));
 
             return element;
@@ -259,22 +259,22 @@ namespace Deol.Alfalab.Lims.API.Messages
         {
             var element = base.ToXMLElement();
 
-            element.Add(new XAttribute("Date", MessageHelper.GetAttributeValue(this.Date)));
+            element.Add(new XAttribute("Date", MessageHelper.GetAttributeValue(Date)));
 
-            if (this.LisId != null)
-                element.Add(new XAttribute("LisId", this.LisId.Value));
+            if (LisId != null)
+                element.Add(new XAttribute("LisId", LisId.Value));
 
-            if (this.MasterLisId != null)
-                element.Add(new XAttribute("MasterLisId", this.MasterLisId.Value));
+            if (MasterLisId != null)
+                element.Add(new XAttribute("MasterLisId", MasterLisId.Value));
 
-            if (this.SamplingDate != null)
-                element.Add(new XAttribute("SamplingDate", MessageHelper.GetAttributeValue(this.SamplingDate.Value)));
+            if (SamplingDate != null)
+                element.Add(new XAttribute("SamplingDate", MessageHelper.GetAttributeValue(SamplingDate.Value)));
 
-            if (this.DeliveryDate != null)
-                element.Add(new XAttribute("DeliveryDate", MessageHelper.GetAttributeValue(this.DeliveryDate.Value)));
+            if (DeliveryDate != null)
+                element.Add(new XAttribute("DeliveryDate", MessageHelper.GetAttributeValue(DeliveryDate.Value)));
 
-            if (this.Orders.Any())
-                element.Add(new XElement("Orders", this.Orders.Select(x => x.ToXMLElement())));
+            if (Orders.Any())
+                element.Add(new XElement("Orders", Orders.Select(x => x.ToXMLElement())));
 
             return element;
         }
@@ -295,34 +295,34 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public XElement ToXMLElement()
         {
-            var element = new XElement("Item", new XAttribute("Code", MessageHelper.GetAttributeValue(this.Code)));
+            var element = new XElement("Item", new XAttribute("Code", MessageHelper.GetAttributeValue(Code)));
 
-            if (this.BiomaterialCode != null)
-                element.Add(new XAttribute("BiomaterialCode", this.BiomaterialCode));
+            if (BiomaterialCode != null)
+                element.Add(new XAttribute("BiomaterialCode", BiomaterialCode));
 
-            if (this.PayType != null)
-                element.Add(new XAttribute("PayType", this.PayType));
+            if (PayType != null)
+                element.Add(new XAttribute("PayType", PayType));
             
-            if(this.DepartmentName != null)
-                element.Add(new XAttribute("DepartmentName", this.DepartmentName));
+            if(DepartmentName != null)
+                element.Add(new XAttribute("DepartmentName", DepartmentName));
 
-            if(this.DepartmentCode != null)
-                element.Add(new XAttribute("DepartmentCode", this.DepartmentCode));
+            if(DepartmentCode != null)
+                element.Add(new XAttribute("DepartmentCode", DepartmentCode));
             
-            if (this.DoctorName != null)
-                element.Add(new XAttribute("DoctorName", this.DoctorName));
+            if (DoctorName != null)
+                element.Add(new XAttribute("DoctorName", DoctorName));
 
-            if(this.DoctorCode != null)
-                element.Add(new XAttribute("DoctorCode", this.DoctorCode));
+            if(DoctorCode != null)
+                element.Add(new XAttribute("DoctorCode", DoctorCode));
 
-            if(this.DiagnosisName != null)
-                element.Add(new XAttribute("DiagnosisName", this.DiagnosisName));
+            if(DiagnosisName != null)
+                element.Add(new XAttribute("DiagnosisName", DiagnosisName));
             
-            if(this.DiagnosisCode != null)
-                element.Add(new XAttribute("DiagnosisCode", this.DiagnosisCode));
+            if(DiagnosisCode != null)
+                element.Add(new XAttribute("DiagnosisCode", DiagnosisCode));
             
-            if(this.CardNr != null)
-                element.Add(new XAttribute("CardNr", this.CardNr));
+            if(CardNr != null)
+                element.Add(new XAttribute("CardNr", CardNr));
 
             return element;
         }
@@ -339,14 +339,14 @@ namespace Deol.Alfalab.Lims.API.Messages
         {
             var element = new XElement("Item");
 
-            if (this.Barcode != null)
-                element.Add(new XAttribute("Barcode", this.Barcode));
+            if (Barcode != null)
+                element.Add(new XAttribute("Barcode", Barcode));
 
-            if (this.BiomaterialCode != null)
-                element.Add(new XAttribute("BiomaterialCode", this.BiomaterialCode));
+            if (BiomaterialCode != null)
+                element.Add(new XAttribute("BiomaterialCode", BiomaterialCode));
 
-            if (this.Orders.Any())
-                element.Add(new XElement("Orders", this.Orders.Select(x => x.ToXMLElement())));
+            if (Orders.Any())
+                element.Add(new XElement("Orders", Orders.Select(x => x.ToXMLElement())));
 
             return element;
         }

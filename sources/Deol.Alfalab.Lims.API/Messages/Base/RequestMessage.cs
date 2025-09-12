@@ -26,17 +26,17 @@ namespace Deol.Alfalab.Lims.API.Messages.Base
 
         public RequestMessage(AuthorizationData authorizationData) 
         {
-            this.Sender     = authorizationData.Sender;
-            this.Receiver   = authorizationData.Receiver;
-            this.Password   = authorizationData.Password;
+            Sender     = authorizationData.Sender;
+            Receiver   = authorizationData.Receiver;
+            Password   = authorizationData.Password;
         }
 
         public string ToXMLMessage()
         {
             var doc = new XDocument(
-                new XElement("Message", this.GetMessageAttributes(),
-                    this.GetMessageElements()));
-
+                new XElement("Message", GetMessageAttributes(),
+                    GetMessageElements()));
+            
             return doc.ToString();
         }
 
@@ -44,11 +44,11 @@ namespace Deol.Alfalab.Lims.API.Messages.Base
 
         private IEnumerable<XAttribute> GetMessageAttributes() => new XAttribute[]
         {
-            new XAttribute("MessageType", MessageHelper.GetAttributeValue(this.MessageType)),
-            new XAttribute("Date", MessageHelper.GetAttributeValue(this.Date)),
-            new XAttribute("Sender", MessageHelper.GetAttributeValue(this.Sender)),
-            new XAttribute("Receiver", MessageHelper.GetAttributeValue(this.Receiver)),
-            new XAttribute("Password", MessageHelper.GetAttributeValue(this.Password))
+            new XAttribute("MessageType", MessageHelper.GetAttributeValue(MessageType)),
+            new XAttribute("Date", MessageHelper.GetAttributeValue(Date)),
+            new XAttribute("Sender", MessageHelper.GetAttributeValue(Sender)),
+            new XAttribute("Receiver", MessageHelper.GetAttributeValue(Receiver)),
+            new XAttribute("Password", MessageHelper.GetAttributeValue(Password))
         };
     }
 }

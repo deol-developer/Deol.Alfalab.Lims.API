@@ -9,7 +9,7 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         protected override void InitMessageElements(XElement message)
         {
-            this.Query = MessageHelper.GetResponseMessageElement<ResponseElementEmail>(message.Element("Query"));
+            Query = MessageHelper.GetResponseMessageElement<ResponseElementEmail>(message.Element("Query"));
         }
     }
 
@@ -23,11 +23,11 @@ namespace Deol.Alfalab.Lims.API.Messages
         public void InitFromXMLElement(XElement element)
         {
             if (int.TryParse(element.Attribute("LisId")?.Value, out var lisId))
-                this.LisId = lisId;
+                LisId = lisId;
 
-            this.MisId          = element.Attribute("MisId")?.Value;
-            this.Nr             = element.Attribute("Nr")?.Value;
-            this.EmailAddress   = element.Attribute("EmailAddress")?.Value;
+            MisId          = element.Attribute("MisId")?.Value;
+            Nr             = element.Attribute("Nr")?.Value;
+            EmailAddress   = element.Attribute("EmailAddress")?.Value;
         }
     }
 }

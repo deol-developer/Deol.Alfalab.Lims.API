@@ -10,9 +10,9 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         protected override void InitMessageElements(XElement message)
         {
-            this.Query = MessageHelper.GetResponseMessageElement<ResponseElementQueueParameters>(message.Element("Query"));
+            Query = MessageHelper.GetResponseMessageElement<ResponseElementQueueParameters>(message.Element("Query"));
 
-            this.Count = MessageHelper.GetResponseMessageElement<ResponseElementCount>(message.Element("Count"));
+            Count = MessageHelper.GetResponseMessageElement<ResponseElementCount>(message.Element("Count"));
         }
     }
 
@@ -27,13 +27,13 @@ namespace Deol.Alfalab.Lims.API.Messages
         public void InitFromXMLElement(XElement element)
         {
             if (bool.TryParse(element.Attribute("OnlyCreatedFromLis")?.Value, out var onlyCreatedFromLis))
-                this.OnlyCreatedFromLis = onlyCreatedFromLis;
+                OnlyCreatedFromLis = onlyCreatedFromLis;
 
             if (bool.TryParse(element.Attribute("AllowModified")?.Value, out var allowModified))
-                this.AllowModified = allowModified;
+                AllowModified = allowModified;
 
-            this.ModValue = element.Attribute("ModValue")?.Value;
-            this.ModCount = element.Attribute("ModCount")?.Value;
+            ModValue = element.Attribute("ModValue")?.Value;
+            ModCount = element.Attribute("ModCount")?.Value;
         }
     }
 
@@ -44,7 +44,7 @@ namespace Deol.Alfalab.Lims.API.Messages
         public void InitFromXMLElement(XElement element)
         {
             if (int.TryParse(element.Attribute("Value")?.Value, out var value))
-                this.Value = value;
+                Value = value;
         }
     }
 }

@@ -18,8 +18,8 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         protected override IEnumerable<XElement> GetMessageElements() => new XElement[]
         {
-            this.Version.ToXMLElement(),
-            this.Referral.ToXMLElement()
+            Version.ToXMLElement(),
+            Referral.ToXMLElement()
         };
     }
 
@@ -29,6 +29,6 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public XElement ToXMLElement() =>
             new XElement("Version",
-                new XAttribute("Version", this.Version));
+                new XAttribute("Version", Version));
     }
 }

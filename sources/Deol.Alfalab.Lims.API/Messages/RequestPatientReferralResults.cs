@@ -17,7 +17,7 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         protected override IEnumerable<XElement> GetMessageElements() => new XElement[]
         {
-            this.Query.ToXMLElement()
+            Query.ToXMLElement()
         };
     }
 
@@ -39,22 +39,22 @@ namespace Deol.Alfalab.Lims.API.Messages
         {
             var element = new XElement("Query");
 
-            if (this.PatientMisId != null)
-                element.Add(new XAttribute("PatientMisId", this.PatientMisId));
+            if (PatientMisId != null)
+                element.Add(new XAttribute("PatientMisId", PatientMisId));
 
-            if (this.PatientCode1 != null)
-                element.Add(new XAttribute("PatientCode1", this.PatientCode1));
+            if (PatientCode1 != null)
+                element.Add(new XAttribute("PatientCode1", PatientCode1));
 
-            if (this.PatientCode2 != null)
-                element.Add(new XAttribute("PatientCode2", this.PatientCode2));
+            if (PatientCode2 != null)
+                element.Add(new XAttribute("PatientCode2", PatientCode2));
 
-            if (this.DateFrom != null)
-                element.Add(new XAttribute("DateFrom", MessageHelper.GetAttributeValue(this.DateFrom.Value)));
+            if (DateFrom != null)
+                element.Add(new XAttribute("DateFrom", MessageHelper.GetAttributeValue(DateFrom.Value)));
 
-            if (this.DateTill != null)
-                element.Add(new XAttribute("DateTill", MessageHelper.GetAttributeValue(this.DateTill.Value)));
+            if (DateTill != null)
+                element.Add(new XAttribute("DateTill", MessageHelper.GetAttributeValue(DateTill.Value)));
 
-            element.Add(new XAttribute("UseUpdateDate", MessageHelper.GetAttributeValue(this.UseUpdateDate)));
+            element.Add(new XAttribute("UseUpdateDate", MessageHelper.GetAttributeValue(UseUpdateDate)));
 
             return element;
         }

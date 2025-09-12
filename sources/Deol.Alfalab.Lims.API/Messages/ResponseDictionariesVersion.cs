@@ -9,7 +9,7 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         protected override void InitMessageElements(XElement message)
         {
-            this.Version = MessageHelper.GetResponseMessageElement<ResponseElementVersion>(message.Element("Version"));
+            Version = MessageHelper.GetResponseMessageElement<ResponseElementVersion>(message.Element("Version"));
         }
     }
 
@@ -20,7 +20,7 @@ namespace Deol.Alfalab.Lims.API.Messages
         public void InitFromXMLElement(XElement element)
         {
             if (int.TryParse(element.Attribute("Version")?.Value, out var ver))
-                this.Version = ver;
+                Version = ver;
         }
     }
 }

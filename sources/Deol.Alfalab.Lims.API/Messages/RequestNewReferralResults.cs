@@ -17,7 +17,7 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         protected override IEnumerable<XElement> GetMessageElements() => new XElement[]
         {
-            this.Query.ToXMLElement()
+            Query.ToXMLElement()
         };
     }
 
@@ -32,14 +32,14 @@ namespace Deol.Alfalab.Lims.API.Messages
         {
             var element =
                 new XElement("Query",
-                    new XAttribute("DateFrom", MessageHelper.GetAttributeValue(this.DateFrom)),
-                    new XAttribute("DateTill", MessageHelper.GetAttributeValue(this.DateTill)));
+                    new XAttribute("DateFrom", MessageHelper.GetAttributeValue(DateFrom)),
+                    new XAttribute("DateTill", MessageHelper.GetAttributeValue(DateTill)));
 
-            if (this.OnlyCreatedFromLis != null)
-                element.Add(new XAttribute("OnlyCreatedFromLis", MessageHelper.GetAttributeValue(this.OnlyCreatedFromLis.Value)));
+            if (OnlyCreatedFromLis != null)
+                element.Add(new XAttribute("OnlyCreatedFromLis", MessageHelper.GetAttributeValue(OnlyCreatedFromLis.Value)));
 
-            if (this.AllowModified != null)
-                element.Add(new XAttribute("AllowModified", MessageHelper.GetAttributeValue(this.AllowModified.Value)));
+            if (AllowModified != null)
+                element.Add(new XAttribute("AllowModified", MessageHelper.GetAttributeValue(AllowModified.Value)));
 
             return element;
         }

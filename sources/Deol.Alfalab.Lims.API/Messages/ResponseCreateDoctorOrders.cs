@@ -9,7 +9,7 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         protected override void InitMessageElements(XElement message)
         {
-            this.Referral = MessageHelper.GetResponseMessageElement<ResponseElementShortReferralId>(message.Element("Referral"));
+            Referral = MessageHelper.GetResponseMessageElement<ResponseElementShortReferralId>(message.Element("Referral"));
         }
     }
 
@@ -20,8 +20,8 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public void InitFromXMLElement(XElement element)
         {
-            this.MisId = element.Attribute("MisId")?.Value;
-            this.Nr = element.Attribute("Nr")?.Value;
+            MisId = element.Attribute("MisId")?.Value;
+            Nr = element.Attribute("Nr")?.Value;
         }
     }
 }

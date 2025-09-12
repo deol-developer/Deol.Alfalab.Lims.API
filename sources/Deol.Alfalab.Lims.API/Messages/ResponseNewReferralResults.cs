@@ -14,9 +14,9 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         protected override void InitMessageElements(XElement message)
         {
-            this.Query = MessageHelper.GetResponseMessageElement<ResponseElementQueueRangeParameters>(message.Element("Query"));
+            Query = MessageHelper.GetResponseMessageElement<ResponseElementQueueRangeParameters>(message.Element("Query"));
 
-            this.Results = MessageHelper.GetResponseMessageElements<ResponseElementNewReferralId>(message.Element("Results"));
+            Results = MessageHelper.GetResponseMessageElements<ResponseElementNewReferralId>(message.Element("Results"));
         }
     }
 
@@ -30,16 +30,16 @@ namespace Deol.Alfalab.Lims.API.Messages
         public void InitFromXMLElement(XElement element)
         {
             if (bool.TryParse(element.Attribute("OnlyCreatedFromLis")?.Value, out var onlyCreatedFromLis))
-                this.OnlyCreatedFromLis = onlyCreatedFromLis;
+                OnlyCreatedFromLis = onlyCreatedFromLis;
 
             if (bool.TryParse(element.Attribute("AllowModified")?.Value, out var allowModified))
-                this.AllowModified = allowModified;
+                AllowModified = allowModified;
 
             if (DateTime.TryParseExact(element.Attribute("DateFrom")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateFrom))
-                this.DateFrom = dateFrom;
+                DateFrom = dateFrom;
 
             if (DateTime.TryParseExact(element.Attribute("DateTill")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateTill))
-                this.DateTill = dateTill;
+                DateTill = dateTill;
         }
     }
 
@@ -52,14 +52,14 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public void InitFromXMLElement(XElement element)
         {
-            this.MisId = element.Attribute("MisId")?.Value;
-            this.Nr = element.Attribute("Nr")?.Value;
+            MisId = element.Attribute("MisId")?.Value;
+            Nr = element.Attribute("Nr")?.Value;
 
             if (int.TryParse(element.Attribute("LisId")?.Value, out var lisId))
-                this.LisId = lisId;
+                LisId = lisId;
 
             if (DateTime.TryParseExact(element.Attribute("UpdateDate")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var updateDate))
-                this.UpdateDate = updateDate;
+                UpdateDate = updateDate;
         }
     }
 }

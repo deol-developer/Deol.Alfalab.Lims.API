@@ -24,31 +24,31 @@ namespace Deol.Alfalab.Lims.API.Messages
         public IEnumerable<ResponseElementDictionaryDelayedTarget> DelayedTargets { get; private set; }
         protected override void InitMessageElements(XElement message)
         {
-            this.Version            = MessageHelper.GetResponseMessageElement<ResponseElementVersion>(message.Element("Version"));
+            Version            = MessageHelper.GetResponseMessageElement<ResponseElementVersion>(message.Element("Version"));
 
-            this.AnalysisGroups     = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryAnalysisGroup>(message.Element("AnalysisGroups"));
+            AnalysisGroups     = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryAnalysisGroup>(message.Element("AnalysisGroups"));
 
-            this.ContainerTypes     = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryContainerType>(message.Element("ContainerTypes"));
+            ContainerTypes     = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryContainerType>(message.Element("ContainerTypes"));
 
-            this.PreanalyticInfos   = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryPreanalyticInfo>(message.Element("PreanalyticInfos"));
+            PreanalyticInfos   = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryPreanalyticInfo>(message.Element("PreanalyticInfos"));
 
-            this.Biomaterials       = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryBiomaterial>(message.Element("Biomaterials"));
+            Biomaterials       = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryBiomaterial>(message.Element("Biomaterials"));
 
-            this.Tests              = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryTest>(message.Element("Tests"));
+            Tests              = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryTest>(message.Element("Tests"));
 
-            this.Microorganisms     = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryMicroorganism>(message.Element("Microorganisms"));
+            Microorganisms     = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryMicroorganism>(message.Element("Microorganisms"));
 
-            this.Drugs              = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryDrug>(message.Element("Drugs"));
+            Drugs              = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryDrug>(message.Element("Drugs"));
 
-            this.Fields             = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryField>(message.Element("Fields"));
+            Fields             = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryField>(message.Element("Fields"));
 
-            this.Analyses           = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryAnalysis>(message.Element("Analyses"));
+            Analyses           = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryAnalysis>(message.Element("Analyses"));
 
-            this.Panels             = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryPanel>(message.Element("Panels"));
+            Panels             = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryPanel>(message.Element("Panels"));
 
-            this.Prices             = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryPrice>(message.Element("Prices"));
+            Prices             = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryPrice>(message.Element("Prices"));
 
-            this.DelayedTargets     = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryDelayedTarget>(message.Element("DelayedTargets"));
+            DelayedTargets     = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryDelayedTarget>(message.Element("DelayedTargets"));
         }
     }
 
@@ -64,18 +64,18 @@ namespace Deol.Alfalab.Lims.API.Messages
         public virtual void InitFromXMLElement(XElement element)
         {
             if (int.TryParse(element.Attribute("Id")?.Value, out var id))
-                this.Id = id;
+                Id = id;
 
-            this.Name = element.Attribute("Name")?.Value;
-            this.Code = element.Attribute("Code")?.Value;
+            Name = element.Attribute("Name")?.Value;
+            Code = element.Attribute("Code")?.Value;
 
             if (DateTime.TryParseExact(element.Attribute("UpdateTime")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var updateTime))
-                this.UpdateTime = updateTime;
+                UpdateTime = updateTime;
 
             if (int.TryParse(element.Attribute("UpdateVersion")?.Value, out var updateVersion))
-                this.UpdateVersion = updateVersion;
+                UpdateVersion = updateVersion;
 
-            this.Removed = Convert.ToBoolean(element.Attribute("Removed")?.Value);
+            Removed = Convert.ToBoolean(element.Attribute("Removed")?.Value);
         }
     }
 
@@ -99,24 +99,24 @@ namespace Deol.Alfalab.Lims.API.Messages
         {
             base.InitFromXMLElement(element);
 
-            this.ShortName = element.Attribute("ShortName")?.Value;
+            ShortName = element.Attribute("ShortName")?.Value;
 
             if (int.TryParse(element.Attribute("ImageIndex")?.Value, out var imageIndex))
-                this.ImageIndex = imageIndex;
+                ImageIndex = imageIndex;
 
             if (bool.TryParse(element.Attribute("NeedCount")?.Value, out var needCount))
-                this.NeedCount = needCount;
+                NeedCount = needCount;
 
             if (int.TryParse(element.Attribute("MaxTestsCount")?.Value, out var maxTestsCount))
-                this.MaxTestsCount = maxTestsCount;
+                MaxTestsCount = maxTestsCount;
 
             if (bool.TryParse(element.Attribute("SkipLabel")?.Value, out var skipLabel))
-                this.SkipLabel = skipLabel;
+                SkipLabel = skipLabel;
 
-            this.Description = element.Attribute("Description")?.Value;
-            this.Extra1 = element.Attribute("Extra1")?.Value;
-            this.Extra2 = element.Attribute("Extra2")?.Value;
-            this.Extra3 = element.Attribute("Extra3")?.Value;
+            Description = element.Attribute("Description")?.Value;
+            Extra1 = element.Attribute("Extra1")?.Value;
+            Extra2 = element.Attribute("Extra2")?.Value;
+            Extra3 = element.Attribute("Extra3")?.Value;
         }
     }
 
@@ -133,15 +133,15 @@ namespace Deol.Alfalab.Lims.API.Messages
         {
             base.InitFromXMLElement(element);
 
-            this.ShortName = element.Attribute("ShortName")?.Value;
+            ShortName = element.Attribute("ShortName")?.Value;
 
             if (int.TryParse(element.Attribute("ImageIndex")?.Value, out var imageIndex))
-                this.ImageIndex = imageIndex;
+                ImageIndex = imageIndex;
 
-            this.Description = element.Attribute("Description")?.Value;
-            this.Extra1 = element.Attribute("Extra1")?.Value;
-            this.Extra2 = element.Attribute("Extra2")?.Value;
-            this.Extra3 = element.Attribute("Extra3")?.Value;
+            Description = element.Attribute("Description")?.Value;
+            Extra1 = element.Attribute("Extra1")?.Value;
+            Extra2 = element.Attribute("Extra2")?.Value;
+            Extra3 = element.Attribute("Extra3")?.Value;
         }
     }
 
@@ -155,11 +155,11 @@ namespace Deol.Alfalab.Lims.API.Messages
         {
             base.InitFromXMLElement(element);
 
-            this.ShortName = element.Attribute("ShortName")?.Value;
-            this.ContainerTypeCode = element.Attribute("ContainerTypeCode")?.Value;
+            ShortName = element.Attribute("ShortName")?.Value;
+            ContainerTypeCode = element.Attribute("ContainerTypeCode")?.Value;
 
             if (int.TryParse(element.Attribute("ContainerTypeId")?.Value, out var containerTypeId))
-                this.ContainerTypeId = containerTypeId;
+                ContainerTypeId = containerTypeId;
         }
     }
 
@@ -184,12 +184,12 @@ namespace Deol.Alfalab.Lims.API.Messages
         {
             base.InitFromXMLElement(element);
 
-            this.ShortName = element.Attribute("ShortName")?.Value;
+            ShortName = element.Attribute("ShortName")?.Value;
 
             if (int.TryParse(element.Attribute("ResultType")?.Value, out var resultType))
-                this.ResultType = IntToDictionaryTestType(resultType);
+                ResultType = IntToDictionaryTestType(resultType);
 
-            this.UnitName = element.Attribute("UnitName")?.Value;
+            UnitName = element.Attribute("UnitName")?.Value;
 
             DictionaryTestType IntToDictionaryTestType(int testTypeInt)
             {
@@ -216,7 +216,7 @@ namespace Deol.Alfalab.Lims.API.Messages
         {
             base.InitFromXMLElement(element);
 
-            this.Name2 = element.Attribute("Name2")?.Value;
+            Name2 = element.Attribute("Name2")?.Value;
         }
     }
 
@@ -228,7 +228,7 @@ namespace Deol.Alfalab.Lims.API.Messages
         {
             base.InitFromXMLElement(element);
 
-            this.Name2 = element.Attribute("Name2")?.Value;
+            Name2 = element.Attribute("Name2")?.Value;
         }
     }
 
@@ -260,32 +260,32 @@ namespace Deol.Alfalab.Lims.API.Messages
         {
             base.InitFromXMLElement(element);
 
-            this.ShortName = element.Attribute("ShortName")?.Value;
+            ShortName = element.Attribute("ShortName")?.Value;
 
             if (int.TryParse(element.Attribute("FieldType")?.Value, out var fieldType))
-                this.FieldType = IntToFieldType(fieldType);
+                FieldType = IntToFieldType(fieldType);
 
             if (int.TryParse(element.Attribute("MaxLength")?.Value, out var maxLength))
-                this.MaxLength = maxLength;
+                MaxLength = maxLength;
 
             if (float.TryParse(element.Attribute("MinValue")?.Value, out var minValue))
-                this.MinValue = minValue;
+                MinValue = minValue;
 
             if (float.TryParse(element.Attribute("MaxValue")?.Value, out var maxValue))
-                this.MaxValue = maxValue;
+                MaxValue = maxValue;
 
             if (int.TryParse(element.Attribute("Precision")?.Value, out var precision))
-                this.Precision = precision;
+                Precision = precision;
 
             if (bool.TryParse(element.Attribute("NeedTime")?.Value, out var needTime))
-                this.NeedTime = needTime;
+                NeedTime = needTime;
 
-            this.DictionaryCode = element.Attribute("DictionaryCode")?.Value;
+            DictionaryCode = element.Attribute("DictionaryCode")?.Value;
 
             if (bool.TryParse(element.Attribute("DictionaryAllowCreate")?.Value, out var dictionaryAllowCreate))
-                this.DictionaryAllowCreate = dictionaryAllowCreate;
+                DictionaryAllowCreate = dictionaryAllowCreate;
 
-            this.DictionaryValues = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryValue>(element.Element("DictionaryValues"));
+            DictionaryValues = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryValue>(element.Element("DictionaryValues"));
 
             FieldType IntToFieldType(int valueInt)
             {
@@ -311,9 +311,9 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public void InitFromXMLElement(XElement element)
         {
-            this.Name = element.Attribute("Name")?.Value;
-            this.Code = element.Attribute("Code")?.Value;
-            this.ShortName = element.Attribute("ShortName")?.Value;
+            Name = element.Attribute("Name")?.Value;
+            Code = element.Attribute("Code")?.Value;
+            ShortName = element.Attribute("ShortName")?.Value;
         }
     }
 
@@ -332,21 +332,21 @@ namespace Deol.Alfalab.Lims.API.Messages
         {
             base.InitFromXMLElement(element);
 
-            this.ShortName = element.Attribute("ShortName")?.Value;
-            this.AnalysisGroupCode = element.Attribute("AnalysisGroupCode")?.Value;
+            ShortName = element.Attribute("ShortName")?.Value;
+            AnalysisGroupCode = element.Attribute("AnalysisGroupCode")?.Value;
 
             if (int.TryParse(element.Attribute("AnalysisGroupId")?.Value, out var analysisGroupId))
-                this.AnalysisGroupId = analysisGroupId;
+                AnalysisGroupId = analysisGroupId;
 
             if (bool.TryParse(element.Attribute("NeedPregnancyInfo")?.Value, out var needPregnancyInfo))
-                this.NeedPregnancyInfo = needPregnancyInfo;
+                NeedPregnancyInfo = needPregnancyInfo;
 
             if (bool.TryParse(element.Attribute("PregnancyInfoRequired")?.Value, out var pregnancyInfoRequired))
-                this.PregnancyInfoRequired = pregnancyInfoRequired;
+                PregnancyInfoRequired = pregnancyInfoRequired;
 
-            this.AnalysesBiomaterials   = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryAnalysisBiomaterial>(element.Element("AnalysisBiomaterials"));
+            AnalysesBiomaterials   = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryAnalysisBiomaterial>(element.Element("AnalysisBiomaterials"));
 
-            this.AnalysesTests          = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryAnalysisTest>(element.Element("AnalysisTests"));
+            AnalysesTests          = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryAnalysisTest>(element.Element("AnalysisTests"));
         }
     }
 
@@ -370,40 +370,40 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public void InitFromXMLElement(XElement element)
         {
-            this.BiomaterialCode = element.Attribute("BiomaterialCode")?.Value;
+            BiomaterialCode = element.Attribute("BiomaterialCode")?.Value;
 
             if (int.TryParse(element.Attribute("BiomaterialId")?.Value, out var biomaterialId))
-                this.BiomaterialId = biomaterialId;
+                BiomaterialId = biomaterialId;
 
             if (int.TryParse(element.Attribute("SamplingGroupId")?.Value, out var samplingGroupId))
-                this.SamplingGroupId = samplingGroupId;
+                SamplingGroupId = samplingGroupId;
 
-            this.SamplingGroupName = element.Attribute("SamplingGroupName")?.Value;
-            this.SamplingGroupCode = element.Attribute("SamplingGroupCode")?.Value;
+            SamplingGroupName = element.Attribute("SamplingGroupName")?.Value;
+            SamplingGroupCode = element.Attribute("SamplingGroupCode")?.Value;
 
             if (int.TryParse(element.Attribute("MaxTestsCount")?.Value, out var maxTestsCount))
-                this.MaxTestsCount = maxTestsCount;
+                MaxTestsCount = maxTestsCount;
 
             if (int.TryParse(element.Attribute("ContainerTypeId")?.Value, out var сontainerTypeId))
-                this.ContainerTypeId = сontainerTypeId;
+                ContainerTypeId = сontainerTypeId;
 
-            this.ContainerTypeCode = element.Attribute("ContainerTypeCode")?.Value;
+            ContainerTypeCode = element.Attribute("ContainerTypeCode")?.Value;
 
             if (int.TryParse(element.Attribute("ContainersCount")?.Value, out var сontainersCount))
-                this.ContainersCount = сontainersCount;
+                ContainersCount = сontainersCount;
 
             if (bool.TryParse(element.Attribute("IsDefault")?.Value, out var isDefault))
-                this.IsDefault = isDefault;
+                IsDefault = isDefault;
 
             if (int.TryParse(element.Attribute("PreanalyticInfoId")?.Value, out var preanalyticInfoId))
-                this.PreanalyticInfoId = preanalyticInfoId;
+                PreanalyticInfoId = preanalyticInfoId;
 
-            this.PreanalyticInfoName = element.Attribute("PreanalyticInfoName")?.Value;
-            this.PreanalyticInfoShortName = element.Attribute("PreanalyticInfoShortName")?.Value;
-            this.PreanalyticInfoDescription = element.Attribute("PreanalyticInfoDescription")?.Value;
+            PreanalyticInfoName = element.Attribute("PreanalyticInfoName")?.Value;
+            PreanalyticInfoShortName = element.Attribute("PreanalyticInfoShortName")?.Value;
+            PreanalyticInfoDescription = element.Attribute("PreanalyticInfoDescription")?.Value;
 
             if (int.TryParse(element.Attribute("PreanalyticInfoImageIndex")?.Value, out var preanalyticInfoImageIndex))
-                this.PreanalyticInfoImageIndex = preanalyticInfoImageIndex;
+                PreanalyticInfoImageIndex = preanalyticInfoImageIndex;
         }
     }
 
@@ -415,12 +415,12 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public void InitFromXMLElement(XElement element)
         {
-            this.TestCode = element.Attribute("TestCode")?.Value;
+            TestCode = element.Attribute("TestCode")?.Value;
 
             if (int.TryParse(element.Attribute("TestId")?.Value, out var testId))
-                this.TestId = testId;
+                TestId = testId;
 
-            this.Mandatory = Convert.ToBoolean(element.Attribute("Mandatory")?.Value);
+            Mandatory = Convert.ToBoolean(element.Attribute("Mandatory")?.Value);
         }
     }
 
@@ -438,19 +438,19 @@ namespace Deol.Alfalab.Lims.API.Messages
         {
             base.InitFromXMLElement(element);
 
-            this.ShortName = element.Attribute("ShortName")?.Value;
-            this.AnalysisGroupCode = element.Attribute("AnalysisGroupCode")?.Value;
+            ShortName = element.Attribute("ShortName")?.Value;
+            AnalysisGroupCode = element.Attribute("AnalysisGroupCode")?.Value;
 
             if (int.TryParse(element.Attribute("AnalysisGroupId")?.Value, out var analysisGroupId))
-                this.AnalysisGroupId = analysisGroupId;
+                AnalysisGroupId = analysisGroupId;
 
             if (bool.TryParse(element.Attribute("NeedPregnancyInfo")?.Value, out var needPregnancyInfo))
-                this.NeedPregnancyInfo = needPregnancyInfo;
+                NeedPregnancyInfo = needPregnancyInfo;
 
             if (bool.TryParse(element.Attribute("PregnancyInfoRequired")?.Value, out var pregnancyInfoRequired))
-                this.PregnancyInfoRequired = pregnancyInfoRequired;
+                PregnancyInfoRequired = pregnancyInfoRequired;
 
-            this.PanelAnalyses = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryPanelAnalysis>(element.Element("PanelAnalyses"));
+            PanelAnalyses = MessageHelper.GetResponseMessageElements<ResponseElementDictionaryPanelAnalysis>(element.Element("PanelAnalyses"));
         }
     }
 
@@ -463,15 +463,15 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public void InitFromXMLElement(XElement element)
         {
-            this.AnalysisCode = element.Attribute("AnalysisCode")?.Value;
+            AnalysisCode = element.Attribute("AnalysisCode")?.Value;
 
             if (int.TryParse(element.Attribute("AnalysisId")?.Value, out var analysisId))
-                this.AnalysisId = analysisId;
+                AnalysisId = analysisId;
 
-            this.BiomaterialCode = element.Attribute("BiomaterialCode")?.Value;
+            BiomaterialCode = element.Attribute("BiomaterialCode")?.Value;
 
             if (int.TryParse(element.Attribute("BiomaterialId")?.Value, out var biomaterialId))
-                this.BiomaterialId = biomaterialId;
+                BiomaterialId = biomaterialId;
         }
     }
 
@@ -499,38 +499,38 @@ namespace Deol.Alfalab.Lims.API.Messages
         public void InitFromXMLElement(XElement element)
         {
             if (int.TryParse(element.Attribute("ServiceId")?.Value, out var serviceId))
-                this.ServiceId = serviceId;
+                ServiceId = serviceId;
 
-            this.ServiceCode = element.Attribute("ServiceCode")?.Value;
+            ServiceCode = element.Attribute("ServiceCode")?.Value;
 
             if (float.TryParse(element.Attribute("Price")?.Value, out var price))
-                this.Price = price;
+                Price = price;
 
-            this.Extra1 = element.Attribute("Extra1")?.Value;
+            Extra1 = element.Attribute("Extra1")?.Value;
 
             if (int.TryParse(element.Attribute("MinDuration")?.Value, out var minDuration))
-                this.MinDuration = minDuration;
+                MinDuration = minDuration;
 
             if (int.TryParse(element.Attribute("MaxDuration")?.Value, out var maxDuration))
-                this.MaxDuration = maxDuration;
+                MaxDuration = maxDuration;
 
             if (int.TryParse(element.Attribute("DurationUnit")?.Value, out var durationUnitInt))
-                this.DurationUnit = IntToDurationUnit(durationUnitInt);
+                DurationUnit = IntToDurationUnit(durationUnitInt);
 
             if (bool.TryParse(element.Attribute("AllowCito")?.Value, out var allowCito))
-                this.AllowCito = allowCito;
+                AllowCito = allowCito;
 
             if (float.TryParse(element.Attribute("CitoPrice")?.Value, out var citoPrice))
-                this.CitoPrice = citoPrice;
+                CitoPrice = citoPrice;
 
             if (int.TryParse(element.Attribute("CitoMinDuration")?.Value, out var citoMinDuration))
-                this.CitoMinDuration = citoMinDuration;
+                CitoMinDuration = citoMinDuration;
 
             if (int.TryParse(element.Attribute("CitoMaxDuration")?.Value, out var citoMaxDuration))
-                this.CitoMaxDuration = citoMaxDuration;
+                CitoMaxDuration = citoMaxDuration;
 
             if (int.TryParse(element.Attribute("CitoDurationUnit")?.Value, out var citoDurationUnit))
-                this.CitoDurationUnit = IntToDurationUnit(citoDurationUnit);
+                CitoDurationUnit = IntToDurationUnit(citoDurationUnit);
 
             DurationUnit IntToDurationUnit(int valueInt)
             {
@@ -556,17 +556,17 @@ namespace Deol.Alfalab.Lims.API.Messages
         public void InitFromXMLElement(XElement element)
         {
             if (DateTime.TryParseExact(element.Attribute("StartDate")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var startDate))
-                this.StartDate = startDate;
+                StartDate = startDate;
 
             if (DateTime.TryParseExact(element.Attribute("EndDate")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var endDate))
-                this.EndDate = endDate;
+                EndDate = endDate;
 
             if (int.TryParse(element.Attribute("TargetId")?.Value, out var targetId))
-                this.TargetId = targetId;
+                TargetId = targetId;
 
-            this.TargetCode = element.Attribute("TargetCode")?.Value;
-            this.ReasonName = element.Attribute("ReasonName")?.Value;
-            this.Comment = element.Attribute("Comment")?.Value;
+            TargetCode = element.Attribute("TargetCode")?.Value;
+            ReasonName = element.Attribute("ReasonName")?.Value;
+            Comment = element.Attribute("Comment")?.Value;
         }
     }
 }

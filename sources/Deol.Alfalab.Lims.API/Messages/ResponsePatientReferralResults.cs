@@ -14,9 +14,9 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         protected override void InitMessageElements(XElement message)
         {
-            this.Query = MessageHelper.GetResponseMessageElement<ResponseElementPatientId>(message.Element("Query"));
+            Query = MessageHelper.GetResponseMessageElement<ResponseElementPatientId>(message.Element("Query"));
 
-            this.Results = MessageHelper.GetResponseMessageElements<ResponseElementStrongReferralId>(message.Element("Results"));
+            Results = MessageHelper.GetResponseMessageElements<ResponseElementStrongReferralId>(message.Element("Results"));
         }
     }
 
@@ -36,18 +36,18 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public void InitFromXMLElement(XElement element)
         {
-            this.PatientMisId = element.Attribute("PatientMisId")?.Value;
-            this.PatientCode1 = element.Attribute("PatientCode1")?.Value;
-            this.PatientCode2 = element.Attribute("PatientCode2")?.Value;
+            PatientMisId = element.Attribute("PatientMisId")?.Value;
+            PatientCode1 = element.Attribute("PatientCode1")?.Value;
+            PatientCode2 = element.Attribute("PatientCode2")?.Value;
 
             if (DateTime.TryParseExact(element.Attribute("DateFrom")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateFrom))
-                this.DateFrom = dateFrom;
+                DateFrom = dateFrom;
 
             if (DateTime.TryParseExact(element.Attribute("DateTill")?.Value, MessageHelper.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateTill))
-                this.DateTill = dateTill;
+                DateTill = dateTill;
 
             if (bool.TryParse(element.Attribute("UseUpdateDate")?.Value, out var useUpdateDate))
-                this.UseUpdateDate = useUpdateDate;
+                UseUpdateDate = useUpdateDate;
         }
     }
 
@@ -60,10 +60,10 @@ namespace Deol.Alfalab.Lims.API.Messages
         public void InitFromXMLElement(XElement element)
         {
             if (int.TryParse(element.Attribute("LisId")?.Value, out var lisId))
-                this.LisId = lisId;
+                LisId = lisId;
 
-            this.MisId = element.Attribute("MisId")?.Value;
-            this.Nr = element.Attribute("Nr")?.Value;
+            MisId = element.Attribute("MisId")?.Value;
+            Nr = element.Attribute("Nr")?.Value;
         }
     }
 }
