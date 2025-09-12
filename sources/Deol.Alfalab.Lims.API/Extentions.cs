@@ -1,4 +1,4 @@
-﻿using System.IO;
+﻿using System;
 using System.Xml.Linq;
 
 namespace Deol.Alfalab.Lims.API
@@ -10,11 +10,7 @@ namespace Deol.Alfalab.Lims.API
             if (document.Declaration is null)
                 return document.ToString();
 
-            using (var writer = new StringWriter())
-            {
-                document.Save(writer);
-                return writer.ToString();
-            }
+            return document.Declaration.ToString() + Environment.NewLine + document.ToString();
         }
     }
 }
