@@ -84,30 +84,37 @@ namespace Deol.Alfalab.Lims.API
 
             async Task<ResponseBlankFile> ParsingResponseFileBinaryAsync(HttpResponseMessage httpResponseMessage)
             {
-                var resultBytes = await httpResponseMessage.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
-
-                var contentType = httpResponseMessage.Content.Headers.ContentType.MediaType;
-
-                var responseBlankFile = new ResponseBlankFile();
-
-                if (contentType == "application/xml")
+                try
                 {
-                    var resultString = Encoding.GetEncoding("Windows-1251").GetString(resultBytes);
-                    var xml = XDocument.Parse(resultString);
+                    var resultBytes = await httpResponseMessage.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
 
-                    responseBlankFile.InitMessage(xml);
-                }
-                else if (contentType.Substring(0, 12) == "application/")
-                {
-                    var fileExtension = contentType.Substring(12);
-                    responseBlankFile.InitBinaryData(resultBytes, fileExtension);
-                }
-                else
-                {
-                    responseBlankFile.InitBinaryData(resultBytes, null);
-                }
+                    var contentType = httpResponseMessage.Content.Headers.ContentType.MediaType;
 
-                return responseBlankFile;
+                    var responseBlankFile = new ResponseBlankFile();
+
+                    if (contentType == "application/xml")
+                    {
+                        var resultString = ResponseEncoding.GetString(resultBytes);
+                        var xml = XDocument.Parse(resultString);
+
+                        responseBlankFile.InitMessage(xml);
+                    }
+                    else if (contentType.Substring(0, 12) == "application/")
+                    {
+                        var fileExtension = contentType.Substring(12);
+                        responseBlankFile.InitBinaryData(resultBytes, fileExtension);
+                    }
+                    else
+                    {
+                        responseBlankFile.InitBinaryData(resultBytes, null);
+                    }
+
+                    return responseBlankFile;
+                }
+                catch (Exception ex)
+                {
+                    throw new ParsingResponseExсeption("Ошибка при разборе ответа от ЛИС", ex);
+                }
             }
         }
 
