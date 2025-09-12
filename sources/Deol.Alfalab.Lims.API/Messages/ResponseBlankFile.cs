@@ -1,4 +1,5 @@
 ﻿using Deol.Alfalab.Lims.API.Messages.Base;
+using System.Xml.Linq;
 
 namespace Deol.Alfalab.Lims.API.Messages
 {
@@ -8,10 +9,10 @@ namespace Deol.Alfalab.Lims.API.Messages
 
         public bool HasMessage => Message != null;
 
-        public void InitMessage(string xmlMessage)
+        public void InitMessage(XDocument document)
         {
             Message = new ResponseMessage();
-            Message.InitFromXMLMessage(xmlMessage);
+            Message.InitFromXMLMessage(document);
         }
 
         public byte[] BinaryData { get; private set; }

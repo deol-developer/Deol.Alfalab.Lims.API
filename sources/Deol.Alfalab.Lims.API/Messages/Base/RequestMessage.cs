@@ -7,7 +7,7 @@ namespace Deol.Alfalab.Lims.API.Messages.Base
 {
     public interface IRequestMessage
     {
-        string ToXMLMessage();
+        XDocument ToXMLMessage();
     }
     public interface IRequestMessageElement
     {
@@ -31,13 +31,13 @@ namespace Deol.Alfalab.Lims.API.Messages.Base
             Password   = authorizationData.Password;
         }
 
-        public string ToXMLMessage()
+        public XDocument ToXMLMessage()
         {
             var doc = new XDocument(
                 new XElement("Message", GetMessageAttributes(),
                     GetMessageElements()));
             
-            return doc.ToString();
+            return doc;
         }
 
         protected virtual IEnumerable<XElement> GetMessageElements() => Enumerable.Empty<XElement>();

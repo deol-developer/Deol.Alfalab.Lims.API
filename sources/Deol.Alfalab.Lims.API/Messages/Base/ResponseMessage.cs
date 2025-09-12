@@ -7,7 +7,7 @@ namespace Deol.Alfalab.Lims.API.Messages.Base
 {
     public interface IResponseMessage
     {
-        void InitFromXMLMessage(string messageStr);
+        void InitFromXMLMessage(XDocument document);
     }
 
     public interface IResponseMessageElement
@@ -29,11 +29,9 @@ namespace Deol.Alfalab.Lims.API.Messages.Base
 
         public bool Success => !HasError && !HahWarnings;
 
-        public void InitFromXMLMessage(string messageStr) 
+        public void InitFromXMLMessage(XDocument document) 
         {
-            var xml = XDocument.Parse(messageStr);
-
-            var message = xml.Element("Message");
+            var message = document.Element("Message");
             InitMessageAttributes(message);
 
             var warnings = message.Element("Warnings");

@@ -93,7 +93,9 @@ namespace Deol.Alfalab.Lims.API
                 if (contentType == "application/xml")
                 {
                     var resultString = Encoding.GetEncoding("Windows-1251").GetString(resultBytes);
-                    responseBlankFile.InitMessage(resultString);
+                    var xml = XDocument.Parse(resultString);
+
+                    responseBlankFile.InitMessage(xml);
                 }
                 else if (contentType.Substring(0, 12) == "application/")
                 {
@@ -126,7 +128,8 @@ namespace Deol.Alfalab.Lims.API
             try
             {
                 var declaration = new XDeclaration("1.0", RequestEncoding.WebName, "yes").ToString();
-                var message = queryMessage.ToXMLMessage();
+                var xml = queryMessage.ToXMLMessage();
+                var message = xml.ToString();
 
                 var content = new StringContent(declaration + Environment.NewLine + message, RequestEncoding, "application/xml");
 
@@ -152,7 +155,9 @@ namespace Deol.Alfalab.Lims.API
                 var resultString = ResponseEncoding.GetString(resultBytes);
 
                 var response = new TResponseMessage();
-                response.InitFromXMLMessage(resultString);
+                var xml = XDocument.Parse(resultString);
+
+                response.InitFromXMLMessage(xml);
 
                 return response;
             }
