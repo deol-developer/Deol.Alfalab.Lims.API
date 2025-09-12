@@ -127,11 +127,13 @@ namespace Deol.Alfalab.Lims.API
         {
             try
             {
-                var declaration = new XDeclaration("1.0", RequestEncoding.WebName, "yes").ToString();
                 var xml = queryMessage.ToXMLMessage();
-                var message = xml.ToString();
+                
+                xml.Declaration = new XDeclaration("1.0", RequestEncoding.WebName, "yes");
 
-                var content = new StringContent(declaration + Environment.NewLine + message, RequestEncoding, "application/xml");
+                var message = xml.ToStringWithDeclaration();
+
+                var content = new StringContent(message, RequestEncoding, "application/xml");
 
                 return await HttpClient.PostAsync("/", content, cancellationToken).ConfigureAwait(false);
             }
@@ -154,8 +156,9 @@ namespace Deol.Alfalab.Lims.API
 
                 var resultString = ResponseEncoding.GetString(resultBytes);
 
-                var response = new TResponseMessage();
                 var xml = XDocument.Parse(resultString);
+
+                var response = new TResponseMessage();
 
                 response.InitFromXMLMessage(xml);
 
