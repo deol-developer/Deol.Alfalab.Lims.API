@@ -11,27 +11,40 @@ namespace Deol.Alfalab.Lims.API
 {
     public class Client : IDisposable
     {
-        private HttpClient HttpClient { get; } = new HttpClient();
+        private readonly HttpClient _httpClient;
 
-        private Encoding RequestEncoding { get; set; }
+        public Encoding RequestEncoding { get; private set; }
 
-        private Encoding ResponseEncoding { get; set; }
+        public Encoding ResponseEncoding { get; private set; }
 
-        public Client(Uri baseAddress, ClientOptions clientOptions)
+        public Client(HttpClient httpClient, ClientOptions clientOptions) 
         {
-            HttpClient.BaseAddress = baseAddress;
+            _httpClient = httpClient;
 
             RequestEncoding = clientOptions.RequestEncoding ?? Encoding.UTF8;
             ResponseEncoding = clientOptions.ResponseEncoding ?? Encoding.GetEncoding("Windows-1251");
         }
 
-        public Client(string baseAddress, ClientOptions clientOptions) : this(new Uri(baseAddress), clientOptions) { }
+        public Client(Uri baseAddress, ClientOptions clientOptions)
+            : this(new HttpClient() { BaseAddress = baseAddress }, clientOptions) { }
 
-        public Client(Uri baseAddress) : this(baseAddress, new ClientOptions()) { }
+        public Client(string baseAddress, ClientOptions clientOptions) 
+            : this(new HttpClient() { BaseAddress = new Uri(baseAddress) }, clientOptions) { }
 
-        public Client(string baseAddress) : this(new Uri(baseAddress), new ClientOptions()) { }
+        public Client(HttpClient httpClient)
+            : this(httpClient, new ClientOptions()) { }
 
-        public void Dispose() => HttpClient.Dispose();
+        public Client(Uri baseAddress) 
+            : this(baseAddress, new ClientOptions()) { }
+
+        public Client(string baseAddress) 
+            : this(new Uri(baseAddress), new ClientOptions()) { }
+
+        #region Public Methods
+
+        public void Dispose() => _httpClient.Dispose();
+
+        #endregion
 
         #region Public API
 
@@ -120,6 +133,8 @@ namespace Deol.Alfalab.Lims.API
 
         #endregion
 
+        #region Private Methods
+
         private async Task<TResponseMessage> SendMessageAsync<TResponseMessage>(IRequestMessage queryMessage, CancellationToken cancellationToken = default)
             where TResponseMessage : IResponseMessage, new()
         {
@@ -142,7 +157,7 @@ namespace Deol.Alfalab.Lims.API
 
                 var content = new StringContent(message, RequestEncoding, "application/xml");
 
-                return await HttpClient.PostAsync("/", content, cancellationToken).ConfigureAwait(false);
+                return await _httpClient.PostAsync("/", content, cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -176,5 +191,7 @@ namespace Deol.Alfalab.Lims.API
                 throw new ParsingResponseExсeption("Ошибка при разборе ответа от ЛИС", ex);
             }
         }
+
+        #endregion
     }
 }
