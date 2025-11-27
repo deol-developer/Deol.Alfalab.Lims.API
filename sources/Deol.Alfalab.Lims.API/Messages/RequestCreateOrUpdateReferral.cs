@@ -164,7 +164,7 @@ namespace Deol.Alfalab.Lims.API.Messages
         public string DepartmentName { get; set; }
         public string DepartmentCode { get; set; }
         public string DoctorName { get; set; }
-        public string DoctorSpecialization { get; set; }
+        public string DoctorProf { get; set; }
         public string DoctorCode { get; set; }
         public bool? Cito { get; set; }
         public string DiagnosisName { get; set; }
@@ -199,8 +199,8 @@ namespace Deol.Alfalab.Lims.API.Messages
             if (DoctorName != null)
                 element.Add(new XAttribute("DoctorName", DoctorName));
 
-            if (DoctorSpecialization != null)
-                element.Add(new XAttribute("DoctorSpecialization", DoctorSpecialization));
+            if (DoctorProf != null)
+                element.Add(new XAttribute("DoctorProf", DoctorProf));
 
             if (DoctorCode != null)
                 element.Add(new XAttribute("DoctorCode", DoctorCode));
