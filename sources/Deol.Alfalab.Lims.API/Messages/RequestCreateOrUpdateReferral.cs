@@ -247,12 +247,14 @@ namespace Deol.Alfalab.Lims.API.Messages
     {
         public RequestElementReferral(bool useUserFields = false) : base(useUserFields) { }
         
+        public bool? AutoNr { get; set; }
         public int? LisId { get; set; }
         public int? MasterLisId { get; set; }
         public DateTime Date { get; set; }
         public DateTime? SamplingDate { get; set; }
         public DateTime? DeliveryDate { get; set; }
-        
+        public string ExternalNr { get; set; }
+
         public ICollection<RequestElementOrder> Orders { get; } = new List<RequestElementOrder>();
 
         public override XElement ToXMLElement()
@@ -260,6 +262,9 @@ namespace Deol.Alfalab.Lims.API.Messages
             var element = base.ToXMLElement();
 
             element.Add(new XAttribute("Date", MessageHelper.GetAttributeValue(Date)));
+
+            if (AutoNr != null)
+                element.Add(new XAttribute("AutoNr", MessageHelper.GetAttributeValue(AutoNr.Value)));
 
             if (LisId != null)
                 element.Add(new XAttribute("LisId", LisId.Value));
@@ -272,6 +277,9 @@ namespace Deol.Alfalab.Lims.API.Messages
 
             if (DeliveryDate != null)
                 element.Add(new XAttribute("DeliveryDate", MessageHelper.GetAttributeValue(DeliveryDate.Value)));
+
+            if (ExternalNr != null)
+                element.Add(new XAttribute("ExternalNr", ExternalNr));
 
             if (Orders.Any())
                 element.Add(new XElement("Orders", Orders.Select(x => x.ToXMLElement())));
