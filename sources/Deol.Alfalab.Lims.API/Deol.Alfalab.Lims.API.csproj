@@ -7,10 +7,10 @@
     <Copyright>Copyright ©  2025, Oleg Devyatkin</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/deol-developer/Deol.Alfalab.Lims.API</PackageProjectUrl>
-    <PackageReleaseNotes>Change interfaces IResponseMessage, IRequestMessage. Add client constructor.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added query-create-referral request fields.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.2.0</Version>
-    <AssemblyVersion>1.2.0.0</AssemblyVersion>
+    <Version>1.2.1</Version>
+    <AssemblyVersion>1.2.1.0</AssemblyVersion>
   </PropertyGroup>
 
 </Project>
